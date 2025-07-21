@@ -73,6 +73,7 @@ function createCircleAlphaMap(size = 32) {
   const canvas = document.createElement('canvas');
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return new THREE.CanvasTexture(canvas); // Manejo seguro de null
   const r = size / 2;
   ctx.clearRect(0, 0, size, size);
   const gradient = ctx.createRadialGradient(r, r, 0, r, r, r);
@@ -320,9 +321,15 @@ function animate() {
   // Animación automática: SIEMPRE se suma
   if (dome) dome.rotation.y += AUTO_ROTATION_SPEED;
   if (clouds) clouds.rotation.y += AUTO_ROTATION_SPEED;
-  if (clouds && clouds.material && clouds.material.map) {
-    clouds.material.map.offset.x += 0.00002; // Velocidad de animación atmosférica
-    clouds.material.map.needsUpdate = true;
+  if (
+    clouds &&
+    clouds.material &&
+    !Array.isArray(clouds.material) &&
+    (clouds.material as THREE.MeshStandardMaterial).map
+  ) {
+    const mat = clouds.material as THREE.MeshStandardMaterial;
+    mat.map!.offset.x += 0.00002; // Velocidad de animación atmosférica
+    mat.map!.needsUpdate = true;
   }
   if (stars) {
     stars.rotation.y += 0.001; // Velocidad de animación atmosférica de las estrellas
