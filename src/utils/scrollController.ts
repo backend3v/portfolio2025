@@ -78,14 +78,9 @@ export class ScrollController {
   // Función para aplicar rotaciones a objetos 3D
   public applyRotations(planet: THREE.Mesh, dome: THREE.Mesh, clouds: THREE.Mesh) {
     if (planet) {
-      planet.rotation.x = this.rotationX * 0.2// Planeta gira sobre X (efecto adelante-atrás)
+      planet.rotation.x = this.rotationX * 0.2;
     }
-    if (dome) {
-      dome.rotation.y = this.rotationY // Cielo gira sobre Y
-    }
-    if (clouds) {
-      clouds.rotation.y = this.rotationY * 0.3 // Nubes giran sobre Z (más lento)
-    }
+    // No modificar dome.rotation.y ni clouds.rotation.y aquí (animación atmosférica automática)
   }
 
   // Función para resetear rotaciones
