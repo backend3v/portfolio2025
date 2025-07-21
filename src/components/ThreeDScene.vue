@@ -8,13 +8,28 @@
           <template v-for="(item, idx) in sections" :key="idx">
             <div
               v-bind:id="item.ID || undefined"
-              :style="{ color: item.COLOR, margin: '0.5em 0', fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'title' ? 'bold' : 'normal', fontSize: item.STYLE === 'titleGroup' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em' }"
+              :class="[
+                item.STYLE === 'link' ? 'section-link' : '',
+                item.STYLE === 'titleGroup' ? 'section-title-group' : '',
+                item.STYLE === 'title' ? 'section-title' : ''
+              ]"
+              :style="{
+                color: item.COLOR,
+                fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'title' ? 'bold' : 'normal',
+                fontSize: item.STYLE === 'titleGroup' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em'
+              }"
             >
               <template v-if="item.STYLE === 'link' && item.LINK">
-                <a :href="item.LINK" target="_blank" :style="{ color: item.COLOR }">{{ item.CONTENT }}</a>
+                <a :href="item.LINK" target="_blank" class="section-link-a">{{ item.CONTENT }}</a>
               </template>
               <template v-else>
                 {{ item.CONTENT }}
+              </template>
+              <template v-if="item.STYLE === 'titleGroup'">
+                <div class="section-underline section-underline-group" :style="{ backgroundColor: item.COLOR }"></div>
+              </template>
+              <template v-else-if="item.STYLE === 'title'">
+                <div class="section-underline section-underline-title" :style="{ backgroundColor: item.COLOR }"></div>
               </template>
             </div>
           </template>
@@ -388,5 +403,44 @@ function animate() {
     0 0 8px var(--color-bg),
     0 0 16px var(--color-bg),
     0 0 24px var(--color-bg);
+}
+.section-link-a {
+  color: #85c1e9 !important;
+  text-decoration: underline;
+}
+.section-link {
+  /* Si quieres que todo el div del link tenga el color, puedes agregar aquí */
+}
+.section-title-group {
+  position: relative;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:3em;
+}
+.section-title {
+  position: relative;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:2em;
+}
+.section-underline {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 0.2em;
+}
+.section-underline-group {
+  width: 90%;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-underline-title {
+  width: 60%;
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
