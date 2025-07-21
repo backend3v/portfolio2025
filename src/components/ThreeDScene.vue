@@ -3,10 +3,11 @@
     <canvas ref="threeCanvas" class="three-canvas"></canvas>
     <div class="text-overlay">
       <div class="text-frame">
-        <div class="text-content" ref="textContentRef">
+        <div class="text-content" ref="textContentRef" style="overflow-y: auto;">
           <div ref="startMarkerRef" id="start-marker" style="height:1px;width:100%;margin-top:2%"></div>
           <template v-for="(item, idx) in sections" :key="idx">
             <div
+              v-bind:id="item.ID || undefined"
               :style="{ color: item.COLOR, margin: '0.5em 0', fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'title' ? 'bold' : 'normal', fontSize: item.STYLE === 'titleGroup' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em' }"
             >
               <template v-if="item.STYLE === 'link' && item.LINK">
@@ -63,6 +64,8 @@ function getScrollLimits() {
 onMounted(() => {
   // Inicializar controlador de scroll
   scrollController = new ScrollController()
+  // Exponer el scrollController globalmente para navegación
+  window.scrollController = scrollController
 
   // Renderer
   renderer = new THREE.WebGLRenderer({ canvas: threeCanvas.value!, antialias: true })
@@ -115,8 +118,8 @@ onMounted(() => {
   // const cloudsNormal = loadTexture('/src/assets/textures/clouds/clouds_normal.jpg')
 
   // Configurar mapeo de textura de nubes para evitar cortes
-  cloudsDiffuse.wrapS = THREE.MirrorWrapping
-  cloudsDiffuse.wrapT = THREE.MirrorWrapping
+  cloudsDiffuse.wrapS = THREE.RepeatWrapping
+  cloudsDiffuse.wrapT = THREE.RepeatWrapping
   cloudsDiffuse.repeat.set(1, 1) // Sin repetición
   cloudsDiffuse.offset.set(0, 0) // Sin offset
   cloudsDiffuse.rotation = 0 // Sin rotación
@@ -290,5 +293,15 @@ function animate() {
   line-height: 1.5;
   word-break: break-word;
   overflow: hidden;
+  text-align: center;
+}
+.text-content > div {
+  text-align: center;
+  text-shadow:
+    0 0 6px var(--color-bg),
+    0 2px 8px var(--color-bg),
+    2px 0 8px var(--color-bg),
+    0 -2px 8px var(--color-bg),
+    -2px 0 8px var(--color-bg);
 }
 </style>

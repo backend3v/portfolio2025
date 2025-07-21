@@ -29,7 +29,7 @@ function onSubmit() {
   align-items: center;
   gap: 1rem;
   padding: 0 1vw;
-  background: var(--color-medium);
+  background: var(--color-bg);
   margin: 0;
   box-sizing: border-box;
 }
@@ -41,24 +41,25 @@ function onSubmit() {
   font-size: 1rem;
   background: var(--color-light);
   color: var(--color-bg);
-  height: 2.2em;
+  height: 1.2em;
 }
 .footer-btn {
   padding: 0.5em 2em;
   border-radius: var(--border-radius);
   border: none;
   background: var(--color-presentacion);
-  color: var(--color-white);
+  color: var(--color-light);;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
-  height: 2.2em;
+  height: 1.2em;
   display: flex;
   align-items: center;
 }
 .footer-btn:hover, .footer-btn:focus {
-  background: var(--color-habilidades);
+  background: var(--color-light);
+  color: var(--color-presentacion);
   outline: none;
 }
 </style>

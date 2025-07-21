@@ -6,7 +6,8 @@
       "STYLE": "titleGroup",
       "COLOR": "#3498db",
       "IMAGE": "logoed",
-      "CONTENT": "Edward Camilo Gonzalez"
+      "CONTENT": "Edward Camilo Gonzalez",
+      "ID":"presentacion"
     },
     {
       "GROUP": "presentacion",
@@ -79,7 +80,8 @@
       "SECTION": "habilidades",
       "STYLE": "titleGroup",
       "COLOR": "#eb984e",
-      "CONTENT": "Habilidades"
+      "CONTENT": "Habilidades",
+      "ID":"habilidades"
     },
     {
       "GROUP": "habilidades",
@@ -148,7 +150,8 @@
       "STYLE": "titleGroup",
       "COLOR": "#a569bd",
       "IMAGE": "notary",
-      "CONTENT": "Proyectos"
+      "CONTENT": "Proyectos",
+      "ID":"proyectos"
     },
     {
       "GROUP": "proyectos",
