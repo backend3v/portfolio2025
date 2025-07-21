@@ -32,7 +32,6 @@ import { ScrollController } from '@/utils/scrollController'
 import sectionsData from '@/data/sections.json'
 import cloudsAlphaUrl from '@/assets/textures/clouds/clouds_alpha.png'
 import planetDiffuseUrl from '@/assets/textures/planet/planet_diffuse.jpg'
-import skyDiffuseUrl from '@/assets/textures/sky/sky_diffuse.jpg'
 
 const threeCanvas = ref<HTMLCanvasElement | null>(null)
 const textContentRef = ref<HTMLDivElement | null>(null)
@@ -43,6 +42,8 @@ let planet: THREE.Mesh, dome: THREE.Mesh, clouds: THREE.Mesh
 let scrollController: ScrollController
 const sections = ref(sectionsData.sections)
 let lastAllowedY = 0 // Para resetear el scroll sobrante
+let autoRotation = 0;
+const AUTO_ROTATION_SPEED = 0.001;
 
 function getFrameHeight() {
   // Calcula el alto real del marco, ajustando si cambian las barras
@@ -64,6 +65,23 @@ function getScrollLimits() {
   return { minY, maxY }
 }
 
+// Función para crear un alphaMap circular suave
+function createCircleAlphaMap(size = 32) {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const r = size / 2;
+  ctx.clearRect(0, 0, size, size);
+  const gradient = ctx.createRadialGradient(r, r, 0, r, r, r);
+  gradient.addColorStop(0, 'rgba(255,255,255,1)');
+  gradient.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(r, r, r, 0, 2 * Math.PI);
+  ctx.fill();
+  return new THREE.CanvasTexture(canvas);
+}
+
 onMounted(() => {
   // Inicializar controlador de scroll
   scrollController = new ScrollController()
@@ -71,8 +89,9 @@ onMounted(() => {
   window.scrollController = scrollController
 
   // Renderer
-  renderer = new THREE.WebGLRenderer({ canvas: threeCanvas.value!, antialias: true })
-  renderer.setClearColor('#34495e') // color de fondo plano
+  renderer = new THREE.WebGLRenderer({ canvas: threeCanvas.value!, antialias: false })
+  renderer.setClearColor('#283747') // color de fondo del cielo
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(threeCanvas.value!.clientWidth, threeCanvas.value!.clientHeight, false)
 
   // Scene
@@ -84,10 +103,10 @@ onMounted(() => {
   camera.position.set(0, 0, 70)
 
   // Luz ambiental
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7)
+  const ambientLight = new THREE.AmbientLight(0xebedef, 0.4) // --color-bg, menor intensidad
   scene.add(ambientLight)
   // Luz direccional
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.7)
+  const dirLight = new THREE.DirectionalLight(0xebedef, 0.5) // --color-bg, menor intensidad
   dirLight.position.set(5, 10, 7)
   scene.add(dirLight)
 
@@ -110,10 +129,6 @@ onMounted(() => {
   const planetDiffuse = loadTexture(planetDiffuseUrl)
   // const planetNormal = loadTexture('/src/assets/textures/planet/planet_normal.jpg')
   // const planetRoughness = loadTexture('/src/assets/textures/planet/planet_roughness.jpg')
-
-  // Texturas del cielo (solo diffuse por ahora)
-  const skyDiffuse = loadTexture(skyDiffuseUrl)
-  // const skyNormal = loadTexture('/src/assets/textures/sky/sky_normal.jpg')
 
   // Texturas de nubes (solo diffuse por ahora)
   const cloudsDiffuse = loadTexture(cloudsAlphaUrl)
@@ -167,19 +182,67 @@ onMounted(() => {
   planet.position.set(0, -42, 0)
   scene.add(planet)
 
-  // Cúpula/cielo con textura
-  const domeGeometry = new THREE.SphereGeometry(100, 64, 64)
+  // Elimina la textura del cielo y crea el domo sin textura
+  const domeGeometry = new THREE.SphereGeometry(100, 24, 16)
   const domeMaterial = new THREE.MeshStandardMaterial({
-    map: skyDiffuse,
-    // normalMap: skyNormal,
-    side: THREE.BackSide
+    color: 0x283747, // color de fondo del cielo solicitado
+    side: THREE.BackSide,
+    transparent: true,
+    opacity: 0.5
   })
   dome = new THREE.Mesh(domeGeometry, domeMaterial)
   dome.position.set(0, -42, 0)
   scene.add(dome)
 
+  // Sistema de partículas de estrellas con tamaño fijo
+  const numStars = 150;
+  const skyRadius = 120;
+  const starsGeometry = new THREE.BufferGeometry();
+  const starPositions = [];
+  const starColors = [];
+  for (let i = 0; i < numStars; i++) {
+    const theta = Math.random() * 2 * Math.PI;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = skyRadius + Math.random() * 2;
+    const x = r * Math.sin(phi) * Math.cos(theta);
+    const y = r * Math.sin(phi) * Math.sin(theta);
+    const z = r * Math.cos(phi);
+    starPositions.push(x, y, z);
+    starColors.push(1, 1, 1); // blanco puro
+  }
+  starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+  starsGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
+
+  const vertexShader = `
+    varying vec3 vColor;
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = 1.5 * (300.0 / -mvPosition.z);
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `;
+
+  const fragmentShader = `
+    varying vec3 vColor;
+    void main() {
+      float d = length(gl_PointCoord - vec2(0.5));
+      if (d > 0.5) discard;
+      gl_FragColor = vec4(vColor * 2.5, 1.0);
+    }
+  `;
+
+  const starsMaterial = new THREE.ShaderMaterial({
+    vertexColors: true,
+    transparent: true,
+    vertexShader,
+    fragmentShader
+  });
+  const stars = new THREE.Points(starsGeometry, starsMaterial);
+  dome.add(stars);
+
   // Nubes con textura y transparencia
-  const cloudsGeometry = new THREE.SphereGeometry(80, 64, 64)
+  const cloudsGeometry = new THREE.SphereGeometry(80, 24, 16)
   
   // Ajustar coordenadas UV para mejor mapeo de textura
   const uvs = cloudsGeometry.attributes.uv
@@ -251,6 +314,9 @@ function animate() {
   if (allow3DRotation && scrollController && planet && dome && clouds) {
     scrollController.applyRotations(planet, dome, clouds)
   }
+  // Animación automática: SIEMPRE se suma
+  if (dome) dome.rotation.y += AUTO_ROTATION_SPEED;
+  if (clouds) clouds.rotation.y += AUTO_ROTATION_SPEED;
   renderer.render(scene, camera)
 }
 </script>
@@ -300,14 +366,10 @@ function animate() {
 }
 .text-content > div {
   text-align: center;
+  font-size: 1.5em;
   text-shadow:
-    2px 2px 0 var(--color-bg),
-    -2px 2px 0 var(--color-bg),
-    2px -2px 0 var(--color-bg),
-    -2px -2px 0 var(--color-bg),
-    2px 0px 0 var(--color-bg),
-    0px 2px 0 var(--color-bg),
-    -2px 0px 0 var(--color-bg),
-    0px -2px 0 var(--color-bg);
+    0 0 8px var(--color-bg),
+    0 0 16px var(--color-bg),
+    0 0 24px var(--color-bg);
 }
 </style>
