@@ -1,0 +1,244 @@
+{
+    "sections": [
+        {
+      "GROUP": "presentacion",
+      "SECTION": "sobremi",
+      "STYLE": "titleGroup",
+      "COLOR": "#3498db",
+      "IMAGE": "logoed",
+      "CONTENT": "Edward Camilo Gonzalez"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "sobremi",
+      "STYLE": "subtitle",
+      "COLOR": "#85c1e9",
+      "CONTENT": "Desarrollador de Software"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "sobremi",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Con más de 7 años de experiencia en varias startups entre ellas Stradata, Symplfica (Top 5 de empresas más innovadoras en latinoamérica por FAST COMPANY 2023), mangosoft y tulpep. Desarrollando software para diversas industrias, cuento con la experiencia adquirida y la capacidad para trabajar de manera autónoma."
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "contacto",
+      "STYLE": "title",
+      "COLOR": "#48c9b0",
+      "CONTENT": "Contacto"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "contacto",
+      "STYLE": "link",
+      "COLOR": "white",
+      "LINK": "mailto:edward1577@gmail.com",
+      "IMAGE": "gmail",
+      "CONTENT": "edward1577@gmail.com"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "contacto",
+      "STYLE": "link",
+      "COLOR": "white",
+      "LINK": "mailto:backender.dev@gmail.com",
+      "IMAGE": "gmail",
+      "CONTENT": "backender.dev@gmail.com"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "contacto",
+      "STYLE": "link",
+      "COLOR": "white",
+      "LINK": "https://www.linkedin.com/in/edward-gonzalez-60730771/",
+      "IMAGE": "linkedin",
+      "CONTENT": "linkedin"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "repositorios",
+      "STYLE": "link",
+      "COLOR": "white",
+      "LINK": "https://github.com/Backendev",
+      "IMAGE": "github",
+      "CONTENT": "Backendev"
+    },
+    {
+      "GROUP": "presentacion",
+      "SECTION": "repositorios",
+      "STYLE": "link",
+      "COLOR": "white",
+      "LINK": "https://github.com/backend3v",
+      "IMAGE": "github",
+      "CONTENT": "Backend3v"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "habilidades",
+      "STYLE": "titleGroup",
+      "COLOR": "#eb984e",
+      "CONTENT": "Habilidades"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "web",
+      "STYLE": "title",
+      "COLOR": "#f8c471",
+      "IMAGE": "web",
+      "CONTENT": "Desarrollo Web"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "web",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Desarrollo de Aplicaciones Web y Microservicios\nImplementación de APIs RESTful\nDesarrollo Frontend utilizando frameworks modernos\nIntegración de bases de datos SQL y NoSQL en aplicaciones web\nOptimización de rendimiento web y SEO"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "datos",
+      "STYLE": "title",
+      "COLOR": "#f8c471",
+      "IMAGE": "datos",
+      "CONTENT": "Datos"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "datos",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "IMAGE": "datos",
+      "CONTENT": "Extracción, Tratamiento y Carga de Datos\nAnálisis estadístico Predictivo y Descriptivo de Datos\nManejo de Bases de Datos Relacionales y No Relacionales\nDesarrollo de dashboards interactivos, Visualización de Datos\nOptimización de consultas SQL para mejorar el rendimiento\nDesarrollo de modelos de Machine Learning"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "movil",
+      "STYLE": "title",
+      "COLOR": "#f8c471",
+      "IMAGE": "movil",
+      "CONTENT": "Desarrollo Móvil"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "movil",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Desarrollo de aplicaciones Móviles para iOS y Android\nImplementación de API REST en aplicaciones móviles\nIntegración de servicios en la nube en aplicaciones móviles\nOptimización de rendimiento y experiencia de usuario en móviles\nDespliegue y publicación en App Store y Google Play"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "escritorio",
+      "STYLE": "title",
+      "COLOR": "#f8c471",
+      "IMAGE": "escritorio",
+      "CONTENT": "Aplicaciones de Escritorio"
+    },
+    {
+      "GROUP": "habilidades",
+      "SECTION": "escritorio",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Desarrollo de Aplicaciones Desktop entorno Linux\nIntegración y Automatización de procesos\nCreación de interfaces gráficas de usuario (GUI) con Qt y Glade\nImplementación de bases de datos locales en aplicaciones de escritorio\nDesarrollo de herramientas de administración de sistemas\nIntegración de servicios web en aplicaciones de escritorio"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "proyectostitle",
+      "STYLE": "titleGroup",
+      "COLOR": "#a569bd",
+      "IMAGE": "notary",
+      "CONTENT": "Proyectos"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "notary",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "notary",
+      "CONTENT": "Modulo Notary (Mango Soft)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "notary",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Notarizacion de documentos, Estudio sobre tecnologias de blockchain, Desarrollo de contratos inteligentes en Solidity; con el fin de testear diferentes tipos de contratos\nSolidity, Python, DynamoDb, AWS Terraform, Docker"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "forms",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "forms",
+      "CONTENT": "Modulo Forms (Mango Soft)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "forms",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Creacion de formularios, Inteface drag & drop de Widgets,Desliegue automatizado de este modulo para diversos clientes. El proyeco se completo con exito y se encuentra en produccion\nPython, Angular, Typescript, AWS, Terraform, Docker, Git"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "autocolte",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "forms",
+      "CONTENT": "Automatizacion formato (Coltefinanciera)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "autocolte",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Creacion de aplicacion de escritorio para automatizar la creacion de un formato\ndesarrollo de instalador para Windows\ncreacion de UI moderna\nuso de sentencias SQL avanzadas\nPython, Script Windows, Oracle"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "sagri",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "forms",
+      "CONTENT": "Aplicacion SAGRILAFT (Stradata)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "sagri",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Creacion de modelos de IA con el fin de aplicar normativas SAGRILAFT y encontrar riesgos o incumplimientos en estas. Apoyo al departamento de Ciencia de datos, Administracion de la base de datos.\nPython, SciKitLearn, Azure"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "formatsbiz",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "forms",
+      "CONTENT": "Aplicacion Generador formatos (Biznaga)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "formatsbiz",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Creacion de Aplicacion Web para la generacion de formatos con multimedia enriquecida para la generacion de campañas de marketing\nPHP, Python, composer, Postgresql, Docker, PowerShell"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "simpli",
+      "STYLE": "title",
+      "COLOR": "#bb8fce",
+      "IMAGE": "forms",
+      "CONTENT": "Aplicacion Web 2.0 (Symplifica)"
+    },
+    {
+      "GROUP": "proyectos",
+      "SECTION": "simpli",
+      "STYLE": "normal",
+      "COLOR": "white",
+      "CONTENT": "Desarrollo de Aplicacion Web 2.0, tomando la experiencia y el estado de la empresa al momento de la ejecucion del proyecto\nPHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS"
+        }
+    ]
+}

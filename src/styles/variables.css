@@ -1,0 +1,17 @@
+:root {
+  --color-bg: #34495e;
+  --color-medium: #85929e;
+  --color-light: #d6dbdf;
+  --color-white: #fff;
+  --color-presentacion: #3498db;
+  --color-habilidades: #eb984e;
+  --color-proyectos: #a569bd;
+  --font-title: 2.2rem;
+  --font-subtitle: 1.5rem;
+  --font-normal: 1rem;
+  --container-padding: 2vw;
+  --border-radius: 1.2em;
+  --menu-height: 4.5rem;
+  --footer-height: 4.5rem;
+  --threejs-height: calc(100vh - var(--menu-height) - var(--footer-height));
+}
