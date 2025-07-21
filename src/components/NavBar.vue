@@ -86,7 +86,7 @@ nav {
 .nav-btn {
   background: var(--color-presentacion);
   border: none;
-  color: var(--color-white);
+  color: var(--color-bg);
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;

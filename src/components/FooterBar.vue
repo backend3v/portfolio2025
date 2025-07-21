@@ -48,7 +48,7 @@ function onSubmit() {
   border-radius: var(--border-radius);
   border: none;
   background: var(--color-presentacion);
-  color: var(--color-light);;
+  color: var(--color-bg);;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -59,7 +59,7 @@ function onSubmit() {
 }
 .footer-btn:hover, .footer-btn:focus {
   background: var(--color-light);
-  color: var(--color-presentacion);
+  color: var(--color-bg);
   outline: none;
 }
 </style>
