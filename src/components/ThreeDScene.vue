@@ -30,6 +30,9 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import * as THREE from 'three'
 import { ScrollController } from '@/utils/scrollController'
 import sectionsData from '@/data/sections.json'
+import cloudsAlphaUrl from '@/assets/textures/clouds/clouds_alpha.png'
+import planetDiffuseUrl from '@/assets/textures/planet/planet_diffuse.jpg'
+import skyDiffuseUrl from '@/assets/textures/sky/sky_diffuse.jpg'
 
 const threeCanvas = ref<HTMLCanvasElement | null>(null)
 const textContentRef = ref<HTMLDivElement | null>(null)
@@ -104,16 +107,16 @@ onMounted(() => {
   }
 
   // Texturas del planeta (solo diffuse por ahora)
-  const planetDiffuse = loadTexture('/src/assets/textures/planet/planet_diffuse.jpg')
+  const planetDiffuse = loadTexture(planetDiffuseUrl)
   // const planetNormal = loadTexture('/src/assets/textures/planet/planet_normal.jpg')
   // const planetRoughness = loadTexture('/src/assets/textures/planet/planet_roughness.jpg')
 
   // Texturas del cielo (solo diffuse por ahora)
-  const skyDiffuse = loadTexture('/src/assets/textures/sky/sky_diffuse.jpg')
+  const skyDiffuse = loadTexture(skyDiffuseUrl)
   // const skyNormal = loadTexture('/src/assets/textures/sky/sky_normal.jpg')
 
   // Texturas de nubes (solo diffuse por ahora)
-  const cloudsDiffuse = loadTexture('/src/assets/textures/clouds/clouds_alpha.png')
+  const cloudsDiffuse = loadTexture(cloudsAlphaUrl)
   // const cloudsAlpha = loadTexture('/src/assets/textures/clouds/clouds_alpha.png')
   // const cloudsNormal = loadTexture('/src/assets/textures/clouds/clouds_normal.jpg')
 
@@ -298,10 +301,13 @@ function animate() {
 .text-content > div {
   text-align: center;
   text-shadow:
-    0 0 6px var(--color-bg),
-    0 2px 8px var(--color-bg),
-    2px 0 8px var(--color-bg),
-    0 -2px 8px var(--color-bg),
-    -2px 0 8px var(--color-bg);
+    2px 2px 0 var(--color-bg),
+    -2px 2px 0 var(--color-bg),
+    2px -2px 0 var(--color-bg),
+    -2px -2px 0 var(--color-bg),
+    2px 0px 0 var(--color-bg),
+    0px 2px 0 var(--color-bg),
+    -2px 0px 0 var(--color-bg),
+    0px -2px 0 var(--color-bg);
 }
 </style>

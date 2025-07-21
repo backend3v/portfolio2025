@@ -1,6 +1,9 @@
 <template>
   <nav aria-label="Navegación principal">
     <ul class="nav-list">
+      <li class="nav-logo">
+        <img :src="logoEd" alt="Logo" class="logo-img" />
+      </li>
       <li v-for="group in groups" :key="group.key">
         <button class="nav-btn" @click="scrollToSectionById(group.key)">
           {{ group.label }}
@@ -12,6 +15,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import logoEd from '@/assets/images/logoed.png'
 const groups = [
   { key: 'presentacion', label: 'Inicio' }
 ]
@@ -59,14 +63,25 @@ nav {
 }
 .nav-list {
   display: flex;
-  gap: 2rem;
+  gap: 0rem;
   list-style: none;
   margin: 0;
   padding: 0;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+.logo-img {
+  height: 1.5rem;
+  margin:0.1rem;
+  width: auto;
+  display: block;
 }
 .nav-btn {
   background: var(--color-presentacion);
@@ -75,7 +90,7 @@ nav {
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  padding: 0.1em 1.2em;
+  padding: 0.05em 1.2em;
   border-radius: var(--border-radius);
   transition: background 0.2s, color 0.2s;
   height: 100%;

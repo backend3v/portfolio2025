@@ -4,7 +4,7 @@
       v-model="inputValue"
       class="footer-input"
       type="text"
-      placeholder="Escribe tu mensaje..."
+      placeholder="Chat con IA en construccion..."
       aria-label="Entrada de texto"
     />
     <button class="footer-btn" type="submit">Enviar</button>
