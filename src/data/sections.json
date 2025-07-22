@@ -3,7 +3,7 @@
         {
       "GROUP": "presentacion",
       "SECTION": "sobremi",
-      "STYLE": "titleGroup",
+      "STYLE": "titleName",
       "COLOR": "#3498db",
       "IMAGE": "logoed",
       "CONTENT": "Edward Camilo Gonzalez",
@@ -28,6 +28,7 @@
       "SECTION": "contacto",
       "STYLE": "title",
       "COLOR": "#48c9b0",
+      "ICONS":["fa-solid fa-envelope","fa-brands fa-linkedin","fa-brands fa-github"],
       "CONTENT": "Contacto"
     },
     {
@@ -35,24 +36,17 @@
       "SECTION": "contacto",
       "STYLE": "link",
       "COLOR": "white",
-      "LINK": "mailto:edward1577@gmail.com",
-      "IMAGE": "gmail",
-      "CONTENT": "edward1577@gmail.com"
-    },
-    {
-      "GROUP": "presentacion",
-      "SECTION": "contacto",
-      "STYLE": "link",
-      "COLOR": "white",
+      "ICONS":["fa-solid fa-envelope"],
       "LINK": "mailto:backender.dev@gmail.com",
       "IMAGE": "gmail",
-      "CONTENT": "backender.dev@gmail.com"
+      "CONTENT": "Correo electrónico"
     },
     {
       "GROUP": "presentacion",
       "SECTION": "contacto",
       "STYLE": "link",
       "COLOR": "white",
+      "ICONS":["fa-brands fa-linkedin"],
       "LINK": "https://www.linkedin.com/in/edward-gonzalez-60730771/",
       "IMAGE": "linkedin",
       "CONTENT": "linkedin"
@@ -62,6 +56,7 @@
       "SECTION": "repositorios",
       "STYLE": "link",
       "COLOR": "white",
+      "ICONS":["fa-brands fa-github"],
       "LINK": "https://github.com/Backendev",
       "IMAGE": "github",
       "CONTENT": "Backendev"
@@ -71,6 +66,7 @@
       "SECTION": "repositorios",
       "STYLE": "link",
       "COLOR": "white",
+      "ICONS":["fa-brands fa-github"],
       "LINK": "https://github.com/backend3v",
       "IMAGE": "github",
       "CONTENT": "Backend3v"
@@ -80,6 +76,7 @@
       "SECTION": "habilidades",
       "STYLE": "titleGroup",
       "COLOR": "#eb984e",
+      "ICONS":["fa-solid fa-file-code","fa-solid fa-folder-open","fa-brands fa-android","fa-brands fa-apple","fa-brands fa-windows","fa-brands fa-linux"],
       "CONTENT": "Habilidades",
       "ID":"habilidades"
     },
@@ -88,6 +85,7 @@
       "SECTION": "web",
       "STYLE": "title",
       "COLOR": "#f8c471",
+      "ICONS":["fa-solid fa-file-code"],
       "IMAGE": "web",
       "CONTENT": "Desarrollo Web"
     },
@@ -96,13 +94,14 @@
       "SECTION": "web",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Desarrollo de Aplicaciones Web y Microservicios\nImplementación de APIs RESTful\nDesarrollo Frontend utilizando frameworks modernos\nIntegración de bases de datos SQL y NoSQL en aplicaciones web\nOptimización de rendimiento web y SEO"
+      "CONTENT": "Desarrollo de Aplicaciones Web y Microservicios, Implementación de APIs RESTful, Desarrollo Frontend utilizando frameworks modernos, Integración de bases de datos SQL y NoSQL en aplicaciones web, Optimización de rendimiento web y SEO"
     },
     {
       "GROUP": "habilidades",
       "SECTION": "datos",
       "STYLE": "title",
       "COLOR": "#f8c471",
+      "ICONS":["fa-solid fa-folder-open"],
       "IMAGE": "datos",
       "CONTENT": "Datos"
     },
@@ -112,13 +111,14 @@
       "STYLE": "normal",
       "COLOR": "white",
       "IMAGE": "datos",
-      "CONTENT": "Extracción, Tratamiento y Carga de Datos\nAnálisis estadístico Predictivo y Descriptivo de Datos\nManejo de Bases de Datos Relacionales y No Relacionales\nDesarrollo de dashboards interactivos, Visualización de Datos\nOptimización de consultas SQL para mejorar el rendimiento\nDesarrollo de modelos de Machine Learning"
+      "CONTENT": "Extracción, Tratamiento y Carga de Datos, Análisis estadístico Predictivo y Descriptivo de Datos, Manejo de Bases de Datos Relacionales y No Relacionales, Desarrollo de dashboards interactivos, Visualización de Datos, Optimización de consultas SQL para mejorar el rendimiento, Desarrollo de modelos de Machine Learning"
     },
     {
       "GROUP": "habilidades",
       "SECTION": "movil",
       "STYLE": "title",
       "COLOR": "#f8c471",
+      "ICONS":["fa-brands fa-android","fa-brands fa-apple"],
       "IMAGE": "movil",
       "CONTENT": "Desarrollo Móvil"
     },
@@ -127,13 +127,14 @@
       "SECTION": "movil",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Desarrollo de aplicaciones Móviles para iOS y Android\nImplementación de API REST en aplicaciones móviles\nIntegración de servicios en la nube en aplicaciones móviles\nOptimización de rendimiento y experiencia de usuario en móviles\nDespliegue y publicación en App Store y Google Play"
+      "CONTENT": "Desarrollo de aplicaciones Móviles para iOS y Android, Implementación de API REST en aplicaciones móviles, Integración de servicios en la nube en aplicaciones móviles, Optimización de rendimiento y experiencia de usuario en móviles, Despliegue y publicación en App Store y Google Play"
     },
     {
       "GROUP": "habilidades",
       "SECTION": "escritorio",
       "STYLE": "title",
       "COLOR": "#f8c471",
+      "ICONS":["fa-brands fa-windows","fa-brands fa-linux"],
       "IMAGE": "escritorio",
       "CONTENT": "Aplicaciones de Escritorio"
     },
@@ -142,13 +143,14 @@
       "SECTION": "escritorio",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Desarrollo de Aplicaciones Desktop entorno Linux\nIntegración y Automatización de procesos\nCreación de interfaces gráficas de usuario (GUI) con Qt y Glade\nImplementación de bases de datos locales en aplicaciones de escritorio\nDesarrollo de herramientas de administración de sistemas\nIntegración de servicios web en aplicaciones de escritorio"
+      "CONTENT": "Desarrollo de Aplicaciones Desktop entorno Linux, Integración y Automatización de procesos, Creación de interfaces gráficas de usuario (GUI) con Qt y Glade, Implementación de bases de datos locales en aplicaciones de escritorio, Desarrollo de herramientas de administración de sistemas, Integración de servicios web en aplicaciones de escritorio"
     },
     {
       "GROUP": "proyectos",
       "SECTION": "proyectostitle",
       "STYLE": "titleGroup",
       "COLOR": "#a569bd",
+      "ICONS":["fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker","fa-brands fa-ethereum","fa-brands fa-php","fa-brands fa-angular","fa-brands fa-windows"],
       "IMAGE": "notary",
       "CONTENT": "Proyectos",
       "ID":"proyectos"
@@ -158,6 +160,7 @@
       "SECTION": "notary",
       "STYLE": "title",
       "COLOR": "#bb8fce",
+      "ICONS":["fa-brands fa-ethereum","fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker"],
       "IMAGE": "notary",
       "CONTENT": "Modulo Notary (Mango Soft)"
     },
@@ -166,7 +169,7 @@
       "SECTION": "notary",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Notarizacion de documentos, Estudio sobre tecnologias de blockchain, Desarrollo de contratos inteligentes en Solidity; con el fin de testear diferentes tipos de contratos\nSolidity, Python, DynamoDb, AWS Terraform, Docker"
+      "CONTENT": "Notarizacion de documentos, Estudio sobre tecnologias de blockchain, Desarrollo de contratos inteligentes en Solidity; con el fin de testear diferentes tipos de contratos <=> | Solidity, Python, DynamoDb, AWS Terraform, Docker |"
     },
     {
       "GROUP": "proyectos",
@@ -174,6 +177,7 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
+      "ICONS":["fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker","fa-brands fa-angular"],
       "CONTENT": "Modulo Forms (Mango Soft)"
     },
     {
@@ -181,7 +185,7 @@
       "SECTION": "forms",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Creacion de formularios, Inteface drag & drop de Widgets,Desliegue automatizado de este modulo para diversos clientes. El proyeco se completo con exito y se encuentra en produccion\nPython, Angular, Typescript, AWS, Terraform, Docker, Git"
+      "CONTENT": "Creacion de formularios, Inteface drag & drop de Widgets, Despliegue automatizado de este modulo para diversos clientes. El proyecto se completo con exito y se encuentra en produccion <=> | Python, Angular, Typescript, AWS, Terraform, Docker, Git |"
     },
     {
       "GROUP": "proyectos",
@@ -189,6 +193,7 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
+      "ICONS":["fa-brands fa-python","fa-brands fa-windows","fa-brands fa-powershell"],
       "CONTENT": "Automatizacion formato (Coltefinanciera)"
     },
     {
@@ -196,7 +201,7 @@
       "SECTION": "autocolte",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Creacion de aplicacion de escritorio para automatizar la creacion de un formato\ndesarrollo de instalador para Windows\ncreacion de UI moderna\nuso de sentencias SQL avanzadas\nPython, Script Windows, Oracle"
+      "CONTENT": "Creacion de aplicacion de escritorio para automatizar la creacion de un formato , desarrollo de instalador para Windows , creacion de UI moderna , uso de sentencias SQL avanzadas <=> | Python, Script Windows, Oracle |"
     },
     {
       "GROUP": "proyectos",
@@ -204,6 +209,7 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
+      "ICONS":["fa-brands fa-python","fa-brands fa-azure","fa-brands fa-mongodb"],
       "CONTENT": "Aplicacion SAGRILAFT (Stradata)"
     },
     {
@@ -211,7 +217,7 @@
       "SECTION": "sagri",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Creacion de modelos de IA con el fin de aplicar normativas SAGRILAFT y encontrar riesgos o incumplimientos en estas. Apoyo al departamento de Ciencia de datos, Administracion de la base de datos.\nPython, SciKitLearn, Azure"
+      "CONTENT": "Creacion de modelos de IA con el fin de aplicar normativas SAGRILAFT y encontrar riesgos o incumplimientos en estas. Apoyo al departamento de Ciencia de datos, Administracion de la base de datos <=> | Python, SciKitLearn, Azure, MongoDb |"
     },
     {
       "GROUP": "proyectos",
@@ -219,6 +225,7 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
+      "ICONS":["fa-brands fa-php","fa-brands fa-python","fa-brands fa-docker"],
       "CONTENT": "Aplicacion Generador formatos (Biznaga)"
     },
     {
@@ -226,7 +233,7 @@
       "SECTION": "formatsbiz",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Creacion de Aplicacion Web para la generacion de formatos con multimedia enriquecida para la generacion de campañas de marketing\nPHP, Python, composer, Postgresql, Docker, PowerShell"
+      "CONTENT": "Creacion de Aplicacion Web para la generacion de formatos con multimedia enriquecida para la generacion de campañas de marketing <=> |PHP, Python, composer, Postgresql, Docker, PowerShell|"
     },
     {
       "GROUP": "proyectos",
@@ -234,6 +241,7 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
+      "ICONS":["fa-brands fa-php","fa-brands fa-python","fa-brands fa-docker","fa-brands fa-aws"],
       "CONTENT": "Aplicacion Web 2.0 (Symplifica)"
     },
     {
@@ -241,7 +249,7 @@
       "SECTION": "simpli",
       "STYLE": "normal",
       "COLOR": "white",
-      "CONTENT": "Desarrollo de Aplicacion Web 2.0, tomando la experiencia y el estado de la empresa al momento de la ejecucion del proyecto\nPHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS"
+      "CONTENT": "Desarrollo de Aplicacion Web 2.0, tomando la experiencia y el estado de la empresa al momento de la ejecucion del proyecto <=> | PHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS |"
         }
     ]
 }
