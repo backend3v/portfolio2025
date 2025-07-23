@@ -1,13 +1,20 @@
 {
-    "sections": [
-        {
+  "sections": [
+    {
+      "GROUP": "presentacion",
+      "SECTION": "logo",
+      "TEMPLATE": "logo",
+      "COLOR": "#3498db",
+      "STYLE": "text"
+    },
+    {
       "GROUP": "presentacion",
       "SECTION": "sobremi",
       "STYLE": "titleName",
       "COLOR": "#3498db",
       "IMAGE": "logoed",
       "CONTENT": "Edward Camilo Gonzalez",
-      "ID":"presentacion"
+      "ID": "presentacion"
     },
     {
       "GROUP": "presentacion",
@@ -29,7 +36,7 @@
       "STYLE": "titleGroupB",
       "COLOR": "#3498db",
       "CONTENT": "Contacto",
-      "ID":"contacto"
+      "ID": "contacto"
     },
     {
       "GROUP": "presentacion",
@@ -43,16 +50,25 @@
       "SECTION": "habilidades",
       "STYLE": "titleGroup",
       "COLOR": "#eb984e",
-      "ICONS":["fa-solid fa-file-code","fa-solid fa-folder-open","fa-brands fa-android","fa-brands fa-apple","fa-brands fa-windows","fa-brands fa-linux"],
+      "ICONS": [
+        "fa-solid fa-file-code",
+        "fa-solid fa-folder-open",
+        "fa-brands fa-android",
+        "fa-brands fa-apple",
+        "fa-brands fa-windows",
+        "fa-brands fa-linux"
+      ],
       "CONTENT": "Habilidades",
-      "ID":"habilidades"
+      "ID": "habilidades"
     },
     {
       "GROUP": "habilidades",
       "SECTION": "web",
       "STYLE": "title",
       "COLOR": "#f8c471",
-      "ICONS":["fa-solid fa-file-code"],
+      "ICONS": [
+        "fa-solid fa-file-code"
+      ],
       "IMAGE": "web",
       "CONTENT": "Desarrollo Web"
     },
@@ -68,7 +84,9 @@
       "SECTION": "datos",
       "STYLE": "title",
       "COLOR": "#f8c471",
-      "ICONS":["fa-solid fa-folder-open"],
+      "ICONS": [
+        "fa-solid fa-folder-open"
+      ],
       "IMAGE": "datos",
       "CONTENT": "Datos"
     },
@@ -85,7 +103,10 @@
       "SECTION": "movil",
       "STYLE": "title",
       "COLOR": "#f8c471",
-      "ICONS":["fa-brands fa-android","fa-brands fa-apple"],
+      "ICONS": [
+        "fa-brands fa-android",
+        "fa-brands fa-apple"
+      ],
       "IMAGE": "movil",
       "CONTENT": "Desarrollo Móvil"
     },
@@ -101,7 +122,10 @@
       "SECTION": "escritorio",
       "STYLE": "title",
       "COLOR": "#f8c471",
-      "ICONS":["fa-brands fa-windows","fa-brands fa-linux"],
+      "ICONS": [
+        "fa-brands fa-windows",
+        "fa-brands fa-linux"
+      ],
       "IMAGE": "escritorio",
       "CONTENT": "Aplicaciones de Escritorio"
     },
@@ -117,17 +141,30 @@
       "SECTION": "proyectostitle",
       "STYLE": "titleGroup",
       "COLOR": "#a569bd",
-      "ICONS":["fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker","fa-brands fa-ethereum","fa-brands fa-php","fa-brands fa-angular","fa-brands fa-windows"],
+      "ICONS": [
+        "fa-brands fa-python",
+        "fa-brands fa-aws",
+        "fa-brands fa-docker",
+        "fa-brands fa-ethereum",
+        "fa-brands fa-php",
+        "fa-brands fa-angular",
+        "fa-brands fa-windows"
+      ],
       "IMAGE": "notary",
       "CONTENT": "Proyectos",
-      "ID":"proyectos"
+      "ID": "proyectos"
     },
     {
       "GROUP": "proyectos",
       "SECTION": "notary",
       "STYLE": "title",
       "COLOR": "#bb8fce",
-      "ICONS":["fa-brands fa-ethereum","fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker"],
+      "ICONS": [
+        "fa-brands fa-ethereum",
+        "fa-brands fa-python",
+        "fa-brands fa-aws",
+        "fa-brands fa-docker"
+      ],
       "IMAGE": "notary",
       "CONTENT": "Modulo Notary (Mango Soft)"
     },
@@ -144,7 +181,12 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
-      "ICONS":["fa-brands fa-python","fa-brands fa-aws","fa-brands fa-docker","fa-brands fa-angular"],
+      "ICONS": [
+        "fa-brands fa-python",
+        "fa-brands fa-aws",
+        "fa-brands fa-docker",
+        "fa-brands fa-angular"
+      ],
       "CONTENT": "Modulo Forms (Mango Soft)"
     },
     {
@@ -160,7 +202,11 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
-      "ICONS":["fa-brands fa-python","fa-brands fa-windows","fa-brands fa-powershell"],
+      "ICONS": [
+        "fa-brands fa-python",
+        "fa-brands fa-windows",
+        "fa-brands fa-powershell"
+      ],
       "CONTENT": "Automatizacion formato (Coltefinanciera)"
     },
     {
@@ -176,7 +222,11 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
-      "ICONS":["fa-brands fa-python","fa-brands fa-azure","fa-brands fa-mongodb"],
+      "ICONS": [
+        "fa-brands fa-python",
+        "fa-brands fa-azure",
+        "fa-brands fa-mongodb"
+      ],
       "CONTENT": "Aplicacion SAGRILAFT (Stradata)"
     },
     {
@@ -192,7 +242,11 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
-      "ICONS":["fa-brands fa-php","fa-brands fa-python","fa-brands fa-docker"],
+      "ICONS": [
+        "fa-brands fa-php",
+        "fa-brands fa-python",
+        "fa-brands fa-docker"
+      ],
       "CONTENT": "Aplicacion Generador formatos (Biznaga)"
     },
     {
@@ -208,7 +262,12 @@
       "STYLE": "title",
       "COLOR": "#bb8fce",
       "IMAGE": "forms",
-      "ICONS":["fa-brands fa-php","fa-brands fa-python","fa-brands fa-docker","fa-brands fa-aws"],
+      "ICONS": [
+        "fa-brands fa-php",
+        "fa-brands fa-python",
+        "fa-brands fa-docker",
+        "fa-brands fa-aws"
+      ],
       "CONTENT": "Aplicacion Web 2.0 (Symplifica)"
     },
     {
@@ -217,6 +276,6 @@
       "STYLE": "normal",
       "COLOR": "white",
       "CONTENT": "Desarrollo de Aplicacion Web 2.0, tomando la experiencia y el estado de la empresa al momento de la ejecucion del proyecto <=> | PHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS |"
-        }
-    ]
+    }
+  ]
 }

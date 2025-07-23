@@ -87,24 +87,24 @@ main {
 }
 .floating-home-btn-global {
   position: fixed;
-    bottom: 1.5%;
-    right: 1%;
-    z-index: 1000;
-    background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    /* padding: 0.8em 2em; */
-    font-size: 1.1em;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 7%;
-    height: 7%;
+  bottom: 1.5%;
+  right: 1%;
+  z-index: 1000;
+  background: var(--color-medium);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 3.5em;
+  height: 3.5em;
+  font-size: 1.1em;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 .floating-home-btn-global:hover {
   background: #217dbb;

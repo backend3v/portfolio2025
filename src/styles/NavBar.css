@@ -43,7 +43,7 @@ nav {
   font-size: 0.7em;
   border-radius: 2em;
   border: none;
-  background: #3498db;
+  background: var(--color-medium);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
