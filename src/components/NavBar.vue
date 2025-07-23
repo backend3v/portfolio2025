@@ -1,12 +1,21 @@
 <template>
   <nav aria-label="Navegación principal">
+    <img :src="logoEd" alt="Logo" class="logo-img" />
     <ul class="nav-list">
-      <li class="nav-logo">
-        <img :src="logoEd" alt="Logo" class="logo-img" />
+      
+      <li>
+        <button class="nav-btn" @click="handleInicio">
+          Inicio
+        </button>
       </li>
-      <li v-for="group in groups" :key="group.key">
-        <button class="nav-btn" @click="scrollToSectionById(group.key)">
-          {{ group.label }}
+      <li>
+        <button class="nav-btn" @click="goToSection('blog')">
+          Blog
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" @click="goToSection('chatia')">
+          Chat IA
         </button>
       </li>
     </ul>
@@ -16,9 +25,23 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import logoEd from '@/assets/images/logoed.png'
+import '../styles/NavBar.css';
+import { activeSection } from '@/stores/activeSection'
 const groups = [
   { key: 'presentacion', label: 'Inicio' }
 ]
+
+function goToSection(section: string) {
+  activeSection.value = section
+}
+
+function handleInicio() {
+  if (activeSection.value === 'portafolio') {
+    scrollToSectionById('presentacion')
+  } else {
+    activeSection.value = 'portafolio'
+  }
+}
 
 // Suponemos que el ScrollController está en window para acceso global
 function scrollToSectionById(id: string) {
@@ -49,57 +72,3 @@ function scrollToSectionById(id: string) {
   }
 }
 </script>
-
-<style scoped>
-nav {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-bg);
-  margin: 0;
-  padding: 0;
-}
-.nav-list {
-  display: flex;
-  gap: 0rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  margin-right: 0.5rem;
-}
-.logo-img {
-  height: 1.5rem;
-  margin:0.1rem;
-  width: auto;
-  display: block;
-}
-.nav-btn {
-  background: var(--color-presentacion);
-  border: none;
-  color: var(--color-bg);
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.05em 1.2em;
-  border-radius: var(--border-radius);
-  transition: background 0.2s, color 0.2s;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-.nav-btn:focus, .nav-btn:hover {
-  background: var(--color-light);
-  color: var(--color-bg);
-  outline: none;
-}
-</style>

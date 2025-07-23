@@ -1,9 +1,11 @@
 import * as THREE from 'three'
+import { hasScrolled } from '@/stores/hasScrolled'
 
 export class ScrollController {
   private scrollSpeed = 0.01
   private rotationX = 0
   private rotationY = 0
+  private hasSetScrolled = false
 
   constructor() {
     console.log('ScrollController initialized')
@@ -25,6 +27,10 @@ export class ScrollController {
       // Planeta gira sobre X (más lento), cielo sobre Y
       this.rotationX += e.deltaY * this.scrollSpeed * 0.3
       this.rotationY += e.deltaY * this.scrollSpeed * 0.5
+      if (!this.hasSetScrolled) {
+        hasScrolled.value = true
+        this.hasSetScrolled = true
+      }
     }
 
     document.addEventListener('wheel', handleWheel, { passive: false })
@@ -55,6 +61,10 @@ export class ScrollController {
       this.rotationY += deltaY * this.scrollSpeed * 0.25
       
       startY = currentY
+      if (!this.hasSetScrolled) {
+        hasScrolled.value = true
+        this.hasSetScrolled = true
+      }
     }
 
     const handleTouchEnd = () => {

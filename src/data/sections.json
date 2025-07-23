@@ -26,50 +26,17 @@
     {
       "GROUP": "presentacion",
       "SECTION": "contacto",
-      "STYLE": "title",
-      "COLOR": "#48c9b0",
-      "ICONS":["fa-solid fa-envelope","fa-brands fa-linkedin","fa-brands fa-github"],
-      "CONTENT": "Contacto"
+      "STYLE": "titleGroupB",
+      "COLOR": "#3498db",
+      "CONTENT": "Contacto",
+      "ID":"contacto"
     },
     {
       "GROUP": "presentacion",
       "SECTION": "contacto",
-      "STYLE": "link",
-      "COLOR": "white",
-      "ICONS":["fa-solid fa-envelope"],
-      "LINK": "mailto:backender.dev@gmail.com",
-      "IMAGE": "gmail",
-      "CONTENT": "Correo electrónico"
-    },
-    {
-      "GROUP": "presentacion",
-      "SECTION": "contacto",
-      "STYLE": "link",
-      "COLOR": "white",
-      "ICONS":["fa-brands fa-linkedin"],
-      "LINK": "https://www.linkedin.com/in/edward-gonzalez-60730771/",
-      "IMAGE": "linkedin",
-      "CONTENT": "linkedin"
-    },
-    {
-      "GROUP": "presentacion",
-      "SECTION": "repositorios",
-      "STYLE": "link",
-      "COLOR": "white",
-      "ICONS":["fa-brands fa-github"],
-      "LINK": "https://github.com/Backendev",
-      "IMAGE": "github",
-      "CONTENT": "Backendev"
-    },
-    {
-      "GROUP": "presentacion",
-      "SECTION": "repositorios",
-      "STYLE": "link",
-      "COLOR": "white",
-      "ICONS":["fa-brands fa-github"],
-      "LINK": "https://github.com/backend3v",
-      "IMAGE": "github",
-      "CONTENT": "Backend3v"
+      "TEMPLATE": "contacto",
+      "COLOR": "#3498db",
+      "STYLE": "titleGroupC"
     },
     {
       "GROUP": "habilidades",
