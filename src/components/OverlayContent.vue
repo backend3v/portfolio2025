@@ -52,8 +52,8 @@
             </template>
 
             <!-- Texto principal e iconos para links -->
-            <template v-if="item.STYLE === 'link' && item.LINK">
-              <a :href="item.LINK" target="_blank" class="section-link-a" v-html="formatContent(item.CONTENT)"></a>
+            <template v-if="item.STYLE === 'link' && isLinkItem(item)">
+              <a :href="item.LINK || '#'" target="_blank" class="section-link-a" v-html="formatContent(item.CONTENT || '')"></a>
               <template v-if="item.ICONS && item.ICONS.length">
                 <div class="section-icons">
                   <i
@@ -146,6 +146,10 @@ function getTemplateComponent(templateName: string) {
     return ContactoTemplate
   }
   return null
+}
+
+function isLinkItem(item: any): item is { LINK: string } {
+  return item && typeof item.LINK === 'string';
 }
 
 onMounted(() => {
