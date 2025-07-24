@@ -24,6 +24,7 @@ const inputValue = ref('')
 const response = ref<string|null>(null)
 const responseObj = ref<any|null>(null)
 const loading = ref(false)
+const API_URL = import.meta.env.VITE_API_URL
 
 async function sendRequest() {
   if (!inputValue.value.trim()) return;
@@ -31,7 +32,7 @@ async function sendRequest() {
   response.value = null;
   responseObj.value = null;
   try {
-    const res = await axios.post('https://web-vvno.onrender.com/prompt', {
+    const res = await axios.post(`${API_URL}/prompt`, {
       prompt: inputValue.value,
       lang: 'es'
     });
