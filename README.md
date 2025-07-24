@@ -1,39 +1,60 @@
-# portafolio3d
+# Portafolio3D - Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+## Descripción
 
-## Recommended IDE Setup
+Frontend en Vue 3 para la visualización interactiva de portafolio, blog y Chat IA, integrando:
+- Consulta de prompts a backend con cacheo inteligente y scraping de noticias/imágenes.
+- Visualización de respuestas IA, gráficas comparativas y noticias.
+- Registro de métricas de visitas.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Cambios recientes
+- **Integración total con backend:**
+  - Consulta a `/prompt` y `/test_prompt`.
+  - Visualización de noticias e imagen obtenidas por scraping.
+  - Respuestas IA cacheadas y normalizadas (NLP) para evitar duplicados.
+- **Gráfica comparativa:**
+  - Consumo de datos en formato matriz (arreglo de arreglos).
+  - Colores y textos personalizables.
+- **Historial y métricas:**
+  - Consulta de historial de prompts (`/prompt-history`).
+  - Consulta de métricas de visitas (`/metrics`).
+- **Mejoras UX:**
+  - Limpieza de prompts antes de enviar (normalización).
+  - Manejo de errores y estados de carga.
 
-## Type Support for `.vue` Imports in TS
+## Instalación y uso
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+### 1. Instalar dependencias
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 2. Configuración
+- Asegúrate de que el backend esté corriendo y accesible (por defecto en `http://localhost:8000`).
+- Puedes configurar la URL del backend en los servicios de consulta si es necesario.
 
-```sh
+### 3. Ejecutar en desarrollo
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 4. Endpoints usados
+- `POST /prompt` — Consulta principal (IA + scraping + cache)
+- `POST /test_prompt` — Consulta de prueba (ejemplo de IA + scraping)
+- `GET /prompt-history` — Historial de prompts cacheados
+- `GET /metrics` — Últimas 100 visitas
+- `POST /send-email` — Envío de emails desde el frontend
 
-```sh
-npm run build
-```
+## Estructura relevante
+- `src/components/ChatIAOverlay.vue` — Integración de consulta y visualización IA.
+- `src/components/ChatIAResponse.vue` — Renderizado de respuesta, gráfica y noticias.
+- `src/components/NavBar.vue`, `FooterBar.vue`, `ThreeDScene.vue` — Navegación y layout.
 
-### Lint with [ESLint](https://eslint.org/)
+## Notas
+- El frontend espera respuestas normalizadas y estructuradas del backend.
+- El historial y las métricas pueden ser usados para análisis y mejoras UX.
+- El scraping de noticias es en tiempo real, la IA se cachea para eficiencia.
 
-```sh
-npm run lint
-```
+---
+
+¿Dudas? Contacta al equipo de desarrollo.

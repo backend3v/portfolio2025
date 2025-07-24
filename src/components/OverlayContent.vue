@@ -103,6 +103,7 @@ import sectionsData from '@/data/sections.json'
 import '../styles/OverlayContent.css';
 import ContactoTemplate from './templates/ContactoTemplate.vue'
 import ScrollInvite from './ScrollInvite.vue'
+import LogoComponent from './templates/LogoComponent.vue'
 
 const textContentRef = ref<HTMLDivElement | null>(null)
 const startMarkerRef = ref<HTMLDivElement | null>(null)
@@ -144,6 +145,9 @@ function scrollToSectionById(id: string) {
 function getTemplateComponent(templateName: string) {
   if (templateName === 'contacto') {
     return ContactoTemplate
+  }
+  if (templateName === 'logo') {
+    return LogoComponent
   }
   return null
 }

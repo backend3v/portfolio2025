@@ -76,7 +76,7 @@
       "GROUP": "habilidades",
       "SECTION": "web",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#f8c471",
       "CONTENT": "Desarrollo de Aplicaciones Web y Microservicios, Implementación de APIs RESTful, Desarrollo Frontend utilizando frameworks modernos, Integración de bases de datos SQL y NoSQL en aplicaciones web, Optimización de rendimiento web y SEO"
     },
     {
@@ -94,7 +94,7 @@
       "GROUP": "habilidades",
       "SECTION": "datos",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#f8c471",
       "IMAGE": "datos",
       "CONTENT": "Extracción, Tratamiento y Carga de Datos, Análisis estadístico Predictivo y Descriptivo de Datos, Manejo de Bases de Datos Relacionales y No Relacionales, Desarrollo de dashboards interactivos, Visualización de Datos, Optimización de consultas SQL para mejorar el rendimiento, Desarrollo de modelos de Machine Learning"
     },
@@ -114,7 +114,7 @@
       "GROUP": "habilidades",
       "SECTION": "movil",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#f8c471",
       "CONTENT": "Desarrollo de aplicaciones Móviles para iOS y Android, Implementación de API REST en aplicaciones móviles, Integración de servicios en la nube en aplicaciones móviles, Optimización de rendimiento y experiencia de usuario en móviles, Despliegue y publicación en App Store y Google Play"
     },
     {
@@ -133,7 +133,7 @@
       "GROUP": "habilidades",
       "SECTION": "escritorio",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#f8c471",
       "CONTENT": "Desarrollo de Aplicaciones Desktop entorno Linux, Integración y Automatización de procesos, Creación de interfaces gráficas de usuario (GUI) con Qt y Glade, Implementación de bases de datos locales en aplicaciones de escritorio, Desarrollo de herramientas de administración de sistemas, Integración de servicios web en aplicaciones de escritorio"
     },
     {
@@ -172,7 +172,7 @@
       "GROUP": "proyectos",
       "SECTION": "notary",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Notarizacion de documentos, Estudio sobre tecnologias de blockchain, Desarrollo de contratos inteligentes en Solidity; con el fin de testear diferentes tipos de contratos <=> | Solidity, Python, DynamoDb, AWS Terraform, Docker |"
     },
     {
@@ -193,7 +193,7 @@
       "GROUP": "proyectos",
       "SECTION": "forms",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Creacion de formularios, Inteface drag & drop de Widgets, Despliegue automatizado de este modulo para diversos clientes. El proyecto se completo con exito y se encuentra en produccion <=> | Python, Angular, Typescript, AWS, Terraform, Docker, Git |"
     },
     {
@@ -213,7 +213,7 @@
       "GROUP": "proyectos",
       "SECTION": "autocolte",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Creacion de aplicacion de escritorio para automatizar la creacion de un formato , desarrollo de instalador para Windows , creacion de UI moderna , uso de sentencias SQL avanzadas <=> | Python, Script Windows, Oracle |"
     },
     {
@@ -233,7 +233,7 @@
       "GROUP": "proyectos",
       "SECTION": "sagri",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Creacion de modelos de IA con el fin de aplicar normativas SAGRILAFT y encontrar riesgos o incumplimientos en estas. Apoyo al departamento de Ciencia de datos, Administracion de la base de datos <=> | Python, SciKitLearn, Azure, MongoDb |"
     },
     {
@@ -253,7 +253,7 @@
       "GROUP": "proyectos",
       "SECTION": "formatsbiz",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Creacion de Aplicacion Web para la generacion de formatos con multimedia enriquecida para la generacion de campañas de marketing <=> |PHP, Python, composer, Postgresql, Docker, PowerShell|"
     },
     {
@@ -274,7 +274,7 @@
       "GROUP": "proyectos",
       "SECTION": "simpli",
       "STYLE": "normal",
-      "COLOR": "white",
+      "COLOR": "#bb8fce",
       "CONTENT": "Desarrollo de Aplicacion Web 2.0, tomando la experiencia y el estado de la empresa al momento de la ejecucion del proyecto <=> | PHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS |"
     }
   ]
