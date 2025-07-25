@@ -51,8 +51,15 @@ async function sendRequest() {
         response.value = res.data;
       }
     }
-  } catch (e: any) {
-    response.value = 'Error al consultar el servicio.';
+  } catch (e) {
+    const err = e as any;
+    if (err.response && err.response.status === 429) {
+      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
+    } else if (err.response && err.response.data && err.response.data.error && err.response.data.error.includes('Límite de consultas')) {
+      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
+    } else {
+      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
+    }
   } finally {
     loading.value = false;
   }
