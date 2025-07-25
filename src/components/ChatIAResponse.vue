@@ -1,35 +1,37 @@
 <template>
   <div v-if="data && (data.topic || data.image)" class="chatia-response-root">
-    <div class="chatia-header">
-      <div class="chatia-header-title">
-        <span v-if="data.topic" class="chatia-title">{{ data.topic }}</span>
+    <div class="chatia-header-flex">
+      <div class="chatia-header-col chatia-header-col-left">
+        <span v-if="data.topic" class="chatia-title-left">{{ capitalizeFirst(data.topic) }}</span>
+        <div v-if="data.phrase" class="chatia-phrase-under">{{ data.phrase }}</div>
       </div>
-      <div v-if="data.image" class="chatia-header-img">
-        <img :src="data.image" alt="Imagen relacionada" />
+      <div class="chatia-header-col chatia-header-col-center">
+        <div v-if="data.resumen" class="chatia-resumen-centered">
+          {{ data.resumen }}
+        </div>
       </div>
-    </div>
-    <!-- Frase en cursiva y entre paréntesis -->
-    <div v-if="data.phrase" class="chatia-phrase">
-      (<em>{{ data.phrase }}</em>)
-    </div>
-    <!-- Resumen -->
-    <div v-if="data.resumen" class="chatia-resumen">
-      {{ data.resumen }}
+      <div class="chatia-header-col chatia-header-col-right">
+        <div v-if="data.image" class="chatia-header-img">
+          <img :src="data.image" alt="Imagen relacionada" />
+        </div>
+      </div>
     </div>
     <!-- Comparativa -->
     <div v-if="data.comparative && data.comparative.length" class="chatia-comparative">
-      <div v-if="data.comparative_variable" class="comparative-title">{{ data.comparative_variable }}</div>
       <div v-if="data.comparative_description" class="comparative-desc">{{ data.comparative_description }}</div>
       <div v-if="chartData" class="comparative-chart">
         <LineChart :chartData="chartData" :chartOptions="chartOptions" />
       </div>
     </div>
-    <!-- Noticias y Video juntos -->
+    <!-- Noticias IA -->
     <div v-if="data.news && Array.isArray(data.news) && data.news.length" class="chatia-news">
-      <div class="news-title">Noticias</div>
+      <div class="news-title-centered">Noticias</div>
+      <div class="news-title-bar"></div>
       <div class="news-list">
         <div v-for="(item, idx) in data.news" :key="idx" class="news-item">
-          <div class="news-valor">{{ item.valor }}</div>
+          <div class="news-valor"><b>{{ item.titulo || item.title }}</b></div>
+          <div v-if="item.fuente || item.source" class="news-fuente">Fuente: {{ item.fuente || item.source }}</div>
+          <div v-if="item.fecha || item.date" class="news-fecha">Fecha: {{ item.fecha || item.date }}</div>
         </div>
       </div>
     </div>
@@ -72,6 +74,11 @@ function getChartData(comparative: Comparative, colors: Colors) {
   return { labels, datasets };
 }
 
+function capitalizeFirst(text: string) {
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 const chartData = computed(() => getChartData(props.data.comparative, props.data.colors));
 const chartOptions = {
   responsive: true,
@@ -79,7 +86,7 @@ const chartOptions = {
     legend: {
       display: true,
       labels: {
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         font: { size: 16 }
       }
     },
@@ -89,9 +96,9 @@ const chartOptions = {
     tooltip: {
       enabled: true,
       backgroundColor: 'rgba(0,0,0,0)', // sin fondo
-      titleColor: 'var(--color-light-gold)',
-      bodyColor: 'var(--color-light-gold)',
-      borderColor: 'var(--color-light-gold)',
+      titleColor: '#f7dc6f',
+      bodyColor: '#f7dc6f',
+      borderColor: '#f7dc6f',
       borderWidth: 1
     }
   },
@@ -99,17 +106,17 @@ const chartOptions = {
     x: {
       grid: {
         display: true,
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         lineWidth: 1
       },
       title: {
         display: true,
         text: 'Eje X',
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         font: { size: 18 }
       },
       ticks: {
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         font: { size: 14 }
       }
     },
@@ -117,17 +124,17 @@ const chartOptions = {
       beginAtZero: true,
       grid: {
         display: true,
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         lineWidth: 1
       },
       title: {
         display: true,
         text: 'Eje Y',
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         font: { size: 18 }
       },
       ticks: {
-        color: 'var(--color-light-gold)',
+        color: '#f7dc6f',
         font: { size: 14 }
       }
     }
@@ -144,37 +151,71 @@ const chartOptions = {
   height: 100%;
   color:var(--color-presentacion)
 }
-.chatia-header {
+.chatia-header-flex {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 2em;
-  height:5%
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5em;
 }
-.chatia-header-title {
-  flex: 1 1 0;
+.chatia-header-col {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.chatia-header-col-left {
+  flex: 0 0 15%;
+  min-width: 120px;
+  align-items: flex-start;
+  padding-left: 1.5em;
+}
+.chatia-header-col-center {
+  flex: 0 0 70%;
   align-items: center;
   justify-content: center;
+  text-align: center;
   min-width: 0;
 }
-.chatia-title {
-  font-size: 5em;
+.chatia-header-col-right {
+  flex: 0 0 15%;
+  min-width: 120px;
+  align-items: flex-end;
+  padding-right: 1.5em;
+}
+.chatia-title-left {
+  font-size: 3.2em;
   font-weight: bold;
-  text-align: center;
+  color:var(--color-light-gold);
+  text-align: left;
   word-break: break-word;
 }
+.chatia-phrase-under {
+  font-style: italic;
+  font-size: 1.1em;
+  color: var(--color-light);
+  margin-top: 0.2em;
+  text-align: left;
+}
+.chatia-resumen-centered {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.5em;
+  line-height: 1.5;
+  max-width: 70vw;
+  color: var(--color-light);
+}
 .chatia-header-img {
-  width: 160px;
-  height: 80%;
+  width: 100%;
+  height: 10em;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .chatia-header-img img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100px;
+  height: 10em;
   border-radius: 1em;
   object-fit: cover;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -184,12 +225,6 @@ const chartOptions = {
   text-align: center;
   margin-bottom: 0.5em;
   font-size: 1.1em;
-}
-.chatia-resumen {
-  text-align: center;
-  margin-bottom: 1em;
-  font-size: 1.5em;
-  line-height: 1.5;
 }
 .chatia-comparative {
   border: 2px solid var(--color-presentacion, #3498db);
@@ -205,12 +240,13 @@ const chartOptions = {
 .comparative-title {
   font-size: 2em;
   font-weight: bold;
-  color: var(--color-presentacion, #3498db);
+  color: var(--color-light);
   text-align: center;
 }
 .comparative-desc {
   font-size: 1.5em;
   text-align: center;
+  color: var(--color-light);
 }
 .comparative-chart-placeholder {
   min-height: 220px;
@@ -227,6 +263,8 @@ const chartOptions = {
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 1em;
   margin-top: 1em;
+  display: flex;
+  justify-content: center;
 }
 .chatia-news {
   border: 2px solid #217dbb;
@@ -235,13 +273,14 @@ const chartOptions = {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width:69%;
+  overflow-y: scroll;
+  width:100%;
   height: 35em;
 }
 .news-title {
   font-size: 2em;
   font-weight: bold;
-  color: #217dbb;
+  color: var(--color-light);
   margin-bottom: 0.7em;
   text-align: left;
 }
@@ -260,11 +299,33 @@ const chartOptions = {
 }
 .news-valor {
   font-size: 1.4em;
+  color: var(--color-light);
+}
+.news-fuente {
+  font-size: 1em;
+  color: var(--color-light);
+}
+.news-fecha {
+  font-size: 0.95em;
+  color: var(--color-light);
 }
 .news-link a {
   font-size: 1em;
   color: #3498db;
   text-decoration: underline;
   word-break: break-all;
+}
+.news-title-centered {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: var(--color-light-gold);
+  text-align: center;
+}
+.news-title-bar {
+  width: 100%;
+  height: 4px;
+  background: #217dbb;
+  margin: 0 auto 1em auto;
+  border-radius: 2px;
 }
 </style> 

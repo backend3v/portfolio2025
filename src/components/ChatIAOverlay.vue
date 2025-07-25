@@ -10,7 +10,7 @@
         <ChatIAResponse :data="responseObj" />
       </template>
       <div v-else-if="response">{{ response }}</div>
-      <div v-else>chat ia guia</div>
+      <div v-else>Ingresa una pregunta y creare una grafica con los datos que encuentre, usare un modelo de IA para generarte una respuesta.</div>
     </div>
   </div>
 </template>
@@ -76,21 +76,22 @@ async function sendRequest() {
   gap: 1em;
 }
 .chat-input {
-  width: 80%;
-  font-size: 1.2em;
+  width: 95%;
+  font-size: 1.5em;
   padding: 0.7em 1em;
   border-radius: 1.5em;
   border: 1px solid #b1c2d5;
   outline: none;
+  font-weight: bold;
 }
 .chat-btn {
-  width: 20%;
-  font-size: 1.1em;
+  width: 5%;
+  font-size: 1.5em;
   padding: 0.7em 0;
   border-radius: 1.5em;
   border: none;
   background: #3498db;
-  color: #fff;
+  color: var(--color-bg);
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
@@ -100,11 +101,12 @@ async function sendRequest() {
   cursor: not-allowed;
 }
 .outputRequest {
+  color: white;
   flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1em;
+  font-size: 2em;
   min-height: 0;
   padding: 2em;
   text-align: center;

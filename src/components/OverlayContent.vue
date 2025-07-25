@@ -13,17 +13,18 @@
               item.STYLE === 'titleGroupB' ? 'section-title-groupB' : '',
               item.STYLE === 'titleGroupC' ? 'section-title-groupC' : '',
               item.STYLE === 'title' ? 'section-title' : '',
-              item.STYLE === 'titleName' ? 'section-title-name' : ''
+              item.STYLE === 'titleName' ? 'section-title-name' : '',
+              item.STYLE === 'sobremi' ? 'section-sobremi' : ''
             ]"
             :style="{
-              color: item.COLOR,
+              color: item.STYLE === 'normal' ? '#fff' : item.COLOR,
               fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' || item.STYLE === 'title' || item.STYLE === 'titleName' ? 'bold' : 'normal',
               fontSize: item.STYLE === 'titleName' ? '2.2em' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em'
             }"
           >
             <component :is="getTemplateComponent(item.TEMPLATE)" />
-            <!-- Barra separadora inferior para titleGroup y titleGroupC -->
-            <template v-if="item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupC'">
+            <!-- Barra inferior solo para titleGroupC -->
+            <template v-if="item.STYLE === 'titleGroupC'">
               <div class="section-underline section-underline-group" :style="{ backgroundColor: item.COLOR }"></div>
             </template>
           </div>
@@ -35,10 +36,11 @@
               item.STYLE === 'titleGroupB' ? 'section-title-groupB' : '',
               item.STYLE === 'titleGroupC' ? 'section-title-groupC' : '',
               item.STYLE === 'title' ? 'section-title' : '',
-              item.STYLE === 'titleName' ? 'section-title-name' : ''
+              item.STYLE === 'titleName' ? 'section-title-name' : '',
+              item.STYLE === 'sobremi' ? 'section-sobremi' : ''
             ]"
             :style="{
-              color: item.COLOR,
+              color: item.STYLE === 'normal' ? '#fff' : item.COLOR,
               fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' || item.STYLE === 'title' || item.STYLE === 'titleName' ? 'bold' : 'normal',
               fontSize: item.STYLE === 'titleName' ? '2.2em' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em'
             }"
@@ -81,13 +83,18 @@
               </template>
             </template>
 
-            <!-- Barra separadora inferior -->
-            <template v-if="item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupC'">
+            <!-- Barra inferior para normal -->
+            <template v-if="item.STYLE === 'normal'">
+              <div class="section-underline section-underline-normal" :style="{ backgroundColor: item.COLOR }"></div>
+            </template>
+            <!-- Barra inferior para titleGroupC -->
+            <template v-else-if="item.STYLE === 'titleGroupC'">
               <div class="section-underline section-underline-group" :style="{ backgroundColor: item.COLOR }"></div>
             </template>
-            <template v-else-if="item.STYLE === 'title'">
+            <!-- Elimina la barra inferior para section-title -->
+            <!-- <template v-else-if="item.STYLE === 'title'">
               <div class="section-underline section-underline-title" :style="{ backgroundColor: item.COLOR }"></div>
-            </template>
+            </template> -->
           </div>
         </template>
         <div ref="endMarkerRef" id="end-marker" style="height:1px;width:100%;margin-bottom:15%"></div>
@@ -204,5 +211,15 @@ defineExpose({ textContentRef, startMarkerRef, endMarkerRef })
   right: 2.5%;
   z-index: 20;
   pointer-events: auto;
+}
+.section-underline-normal {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.section-sobremi {
+  /* Mantiene el estilo actual, puedes personalizar aquí si lo deseas */
 }
 </style> 

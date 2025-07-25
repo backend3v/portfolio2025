@@ -16,14 +16,13 @@ import ChatIAOverlay from './components/ChatIAOverlay.vue'
     </header>
     <main style="position: relative; width: 100vw; height: 100vh; overflow: hidden;">
       <ThreeDScene />
-      <OverlayContent v-if="activeSection === 'portafolio'" class="overlay-absolute" />
-      <BlogOverlay v-else-if="activeSection === 'blog'" class="overlay-absolute" />
-      <ChatIAOverlay v-else-if="activeSection === 'chatia'" class="overlay-absolute" />
+      <router-view class="overlay-absolute" />
     </main>
     <footer>
       <FooterBar />
     </footer>
     <!-- Botón flotante e invitación a hacer scroll, fuera del overlay -->
+    <!--
     <button
       v-if="activeSection === 'portafolio'"
       class="floating-home-btn-global"
@@ -32,6 +31,7 @@ import ChatIAOverlay from './components/ChatIAOverlay.vue'
       <span class="arrow-up">&#8593;</span>
     </button>
     <ScrollInvite v-if="activeSection === 'portafolio'" class="scroll-invite-global" />
+    -->
   </div>
 </template>
 
@@ -83,7 +83,7 @@ main {
   min-width: 0;
   overflow: hidden;
   position: relative;
-    display: flex;
+  display: flex;
 }
 .floating-home-btn-global {
   position: fixed;

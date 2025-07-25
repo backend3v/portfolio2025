@@ -50,7 +50,7 @@
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 7em;
+  margin-top: 2.5em;
   font-size: var(--font-title-group, 1.5em);
   font-weight: bold;
   text-align: center;
@@ -70,7 +70,7 @@
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5em;
+  margin-top: 2.5em;
 }
 .section-title-name {
   font-size: var(--font-title);
@@ -92,12 +92,13 @@
   margin-right: auto;
 }
 .section-underline-group {
-  width: 90%;
-  margin-bottom: 3%;
-  margin-top: 1em;
+  width: 100%;
+  height: 0.275em;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
 }
 .section-underline-title {
-  width: 60%;
+  width: 100%;
   margin-bottom: 2%;
   margin-top: 2%;
 }
