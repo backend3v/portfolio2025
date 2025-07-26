@@ -47,8 +47,8 @@
               class="image-upload-input"
               ref="imageInput"
             />
-            <button type="button" @click="$refs.imageInput.click()" class="upload-btn">
-              {{ newPostImage ? 'Cambiar imagen' : 'Subir imagen' }}
+            <button type="button" @click="triggerImageInput" class="upload-btn">
+              {{ uploadingImage ? 'Subiendo...' : (newPostImage ? 'Cambiar imagen' : 'Subir imagen') }}
             </button>
             <span v-if="newPostImage" class="image-preview">{{ newPostImage }}</span>
           </div>
@@ -361,6 +361,10 @@ function checkKey() {
   } else {
     error.value = true
   }
+}
+
+function triggerImageInput() {
+  imageInput.value?.click()
 }
 </script>
 
