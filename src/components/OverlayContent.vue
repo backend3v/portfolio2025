@@ -19,7 +19,7 @@
             :style="{
               color: item.STYLE === 'normal' ? '#fff' : item.COLOR,
               fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' || item.STYLE === 'title' || item.STYLE === 'titleName' ? 'bold' : 'normal',
-              fontSize: item.STYLE === 'titleName' ? '2.2em' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em'
+              fontSize: item.STYLE === 'titleName' ? 'var(--font-title)' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? 'var(--font-title-group)' : item.STYLE === 'title' ? 'var(--font-subtitle)' : 'var(--font-normal)'
             }"
           >
             <component :is="getTemplateComponent(item.TEMPLATE)" />
@@ -42,7 +42,7 @@
             :style="{
               color: item.STYLE === 'normal' ? '#fff' : item.COLOR,
               fontWeight: item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' || item.STYLE === 'title' || item.STYLE === 'titleName' ? 'bold' : 'normal',
-              fontSize: item.STYLE === 'titleName' ? '2.2em' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? '1.5em' : item.STYLE === 'title' ? '1.2em' : '1em'
+              fontSize: item.STYLE === 'titleName' ? 'var(--font-title)' : item.STYLE === 'titleGroup' || item.STYLE === 'titleGroupB' || item.STYLE === 'titleGroupC' ? 'var(--font-title-group)' : item.STYLE === 'title' ? 'var(--font-subtitle)' : 'var(--font-normal)'
             }"
           >
             <!-- Barra separadora superior -->
@@ -111,6 +111,7 @@ import '../styles/OverlayContent.css';
 import ContactoTemplate from './templates/ContactoTemplate.vue'
 import ScrollInvite from './ScrollInvite.vue'
 import LogoComponent from './templates/LogoComponent.vue'
+import { useOverlayScroll } from '@/utils/useOverlayScroll'
 
 const textContentRef = ref<HTMLDivElement | null>(null)
 const startMarkerRef = ref<HTMLDivElement | null>(null)
@@ -200,6 +201,8 @@ onMounted(() => {
     if (animationFrame) cancelAnimationFrame(animationFrame)
   })
 })
+
+useOverlayScroll(textContentRef, startMarkerRef, endMarkerRef)
 
 defineExpose({ textContentRef, startMarkerRef, endMarkerRef })
 </script>

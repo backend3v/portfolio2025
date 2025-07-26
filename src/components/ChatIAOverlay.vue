@@ -1,24 +1,36 @@
 <template>
-  <div class="chatia-overlay">
-    <div class="inputChat">
-      <input v-model="inputValue" class="chat-input" placeholder="Escribe tu pregunta..." />
-      <button class="chat-btn" @click="sendRequest" :disabled="loading || !inputValue.trim()">Enviar</button>
-    </div>
-    <div class="outputRequest">
-      <div v-if="loading" class="spinner"></div>
-      <template v-else-if="responseObj">
-        <ChatIAResponse :data="responseObj" />
-      </template>
-      <div v-else-if="response">{{ response }}</div>
-      <div v-else>Ingresa una pregunta y creare una grafica con los datos que encuentre, usare un modelo de IA para generarte una respuesta.</div>
+  <div class="text-overlay">
+    <div class="text-frame">
+      <div class="text-content" ref="textContentRef" style="overflow-y: auto;">
+        <div ref="startMarkerRef" id="start-marker" style="height:1px;width:100%;margin-top:2%"></div>
+        <div class="inputChat">
+          <input v-model="inputValue" class="chat-input" placeholder="Escribe tu pregunta..." />
+          <button class="chat-btn" @click="sendRequest" :disabled="loading || !inputValue.trim()">Enviar</button>
+        </div>
+        <div class="outputRequest">
+          <div v-if="loading" class="spinner"></div>
+          <template v-else-if="responseObj">
+            <ChatIAResponse :data="responseObj" />
+          </template>
+          <div v-else-if="response">{{ response }}</div>
+          <div v-else></div>
+        </div>
+        <div ref="endMarkerRef" id="end-marker" style="height:1px;width:100%;margin-bottom:15%"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { useOverlayScroll } from '@/utils/useOverlayScroll'
 import axios from 'axios'
 import ChatIAResponse from './ChatIAResponse.vue'
+
+const textContentRef = ref<HTMLElement | null>(null)
+const startMarkerRef = ref<HTMLElement | null>(null)
+const endMarkerRef = ref<HTMLElement | null>(null)
+useOverlayScroll(textContentRef, startMarkerRef, endMarkerRef)
 
 const inputValue = ref('')
 const response = ref<string|null>(null)
@@ -74,49 +86,81 @@ async function sendRequest() {
   flex-direction: column;
   box-sizing: border-box;
   font-size: 0.5em;
+  padding-top: var(--menu-height); /* Agregar padding para evitar que quede debajo de la navbar */
 }
 .inputChat {
+  position: fixed;
+  top: var(--menu-height);
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
-  height: 5%;
-  padding: 1em 2em;
-  gap: 1em;
+  gap: var(--search-controls-gap);
+  background: var(--color-bg);
+  padding: var(--search-controls-padding);
+  box-shadow: var(--search-controls-shadow);
+  z-index: var(--search-controls-z-index);
+  border-bottom: var(--search-controls-border);
+  height: var(--search-controls-height);
 }
+
 .chat-input {
-  width: 95%;
-  font-size: 1.5em;
-  padding: 0.7em 1em;
-  border-radius: 1.5em;
-  border: 1px solid #b1c2d5;
-  outline: none;
+  flex: 1;
+  font-size: var(--font-chat-normal);
+  padding: var(--input-padding);
+  border-radius: var(--input-border-radius);
   font-weight: bold;
+  outline: none;
+  border: var(--input-border);
+  background: var(--color-light);
+  color: var(--color-bg);
+  transition: var(--input-transition);
 }
+
+.chat-input::placeholder {
+  background: var(--color-light);
+  color: var(--color-medium);
+}
+
+.chat-input:focus {
+  border-color: var(--color-light-gold);
+  background: var(--color-light);
+  color: var(--color-medium);
+}
+
 .chat-btn {
-  width: 5%;
-  font-size: 1.5em;
-  padding: 0.7em 0;
-  border-radius: 1.5em;
+  width: var(--button-width);
+  font-size: var(--font-chat-normal);
+  padding: var(--button-padding);
+  border-radius: var(--button-border-radius);
   border: none;
-  background: #3498db;
+  background: var(--color-light-gold);
   color: var(--color-bg);
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: var(--button-transition);
 }
+
+.chat-btn:hover {
+  background: #f39c12;
+  transform: translateY(-2px);
+}
+
 .chat-btn:disabled {
-  background: #b1c2d5;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
   cursor: not-allowed;
+  transform: none;
 }
+
 .outputRequest {
-  color: white;
-  flex: 1 1 0;
+  margin-top: var(--content-margin-top);
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2em;
-  min-height: 0;
-  padding: 2em;
-  text-align: center;
+  padding: var(--content-padding);
+  overflow-y: auto;
 }
 .spinner {
   border: 6px solid #f3f3f3;
@@ -130,5 +174,62 @@ async function sendRequest() {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inputChat {
+    flex-direction: column;
+    gap: 0.8em;
+    padding: 1em;
+    height: auto;
+  }
+  
+  .chat-input {
+    width: 100%;
+    font-size: var(--font-mobile-normal);
+  }
+  
+  .chat-btn {
+    width: 100%;
+    font-size: var(--font-mobile-normal);
+  }
+  
+  .outputRequest {
+    font-size: var(--font-mobile-title);
+    padding: 1em;
+  }
+  
+  .spinner {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .inputChat {
+    padding: 0.8em;
+    gap: 0.6em;
+  }
+  
+  .chat-input {
+    font-size: 0.9em;
+    padding: 0.5em 0.8em;
+  }
+  
+  .chat-btn {
+    font-size: 0.9em;
+    padding: 0.4em 0;
+  }
+  
+  .outputRequest {
+    font-size: 1.2em;
+    padding: 0.8em;
+  }
+  
+  .spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 </style> 

@@ -1,21 +1,25 @@
 <template>
   <div v-if="data && (data.topic || data.image)" class="chatia-response-root">
-    <div class="chatia-header-flex">
-      <div class="chatia-header-col chatia-header-col-left">
-        <span v-if="data.topic" class="chatia-title-left">{{ capitalizeFirst(data.topic) }}</span>
-        <div v-if="data.phrase" class="chatia-phrase-under">{{ data.phrase }}</div>
+    <!-- Título en una sola fila arriba -->
+    <div v-if="data.topic" class="chatia-title-full-width">
+      {{ capitalizeFirst(data.topic) }}
+    </div>
+    
+    <!-- Phrase debajo del título -->
+    <div v-if="data.phrase" class="chatia-phrase-full-width">
+      {{ data.phrase }}
+    </div>
+    
+    <!-- Descripción e imagen al lado -->
+    <div class="chatia-content-flex">
+      <div v-if="data.resumen" class="chatia-description-container">
+        {{ data.resumen }}
       </div>
-      <div class="chatia-header-col chatia-header-col-center">
-        <div v-if="data.resumen" class="chatia-resumen-centered">
-          {{ data.resumen }}
-        </div>
-      </div>
-      <div class="chatia-header-col chatia-header-col-right">
-        <div v-if="data.image" class="chatia-header-img">
-          <img :src="data.image" alt="Imagen relacionada" />
-        </div>
+      <div v-if="data.image" class="chatia-image-container">
+        <img :src="data.image" alt="Imagen relacionada" />
       </div>
     </div>
+    
     <!-- Comparativa -->
     <div v-if="data.comparative && data.comparative.length" class="chatia-comparative">
       <div v-if="data.comparative_description" class="comparative-desc">{{ data.comparative_description }}</div>
@@ -23,6 +27,7 @@
         <LineChart :chartData="chartData" :chartOptions="chartOptions" />
       </div>
     </div>
+    
     <!-- Noticias IA -->
     <div v-if="data.news && Array.isArray(data.news) && data.news.length" class="chatia-news">
       <div class="news-title-centered">Noticias</div>
@@ -273,9 +278,7 @@ const chartOptions = {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  overflow-y: scroll;
   width:100%;
-  height: 35em;
 }
 .news-title {
   font-size: 2em;
@@ -327,5 +330,84 @@ const chartOptions = {
   background: #217dbb;
   margin: 0 auto 1em auto;
   border-radius: 2px;
+}
+
+/* Nuevo layout para ChatIAResponse */
+.chatia-title-full-width {
+  width: 100%;
+  font-size: 3.2em;
+  font-weight: bold;
+  color: var(--color-light-gold);
+  text-align: center;
+  margin-bottom: 1em;
+  word-break: break-word;
+}
+
+.chatia-phrase-full-width {
+  width: 100%;
+  font-style: italic;
+  font-size: 1.1em;
+  color: var(--color-light);
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.chatia-content-flex {
+  display: flex;
+  gap: 2em;
+  align-items: flex-start;
+  margin-bottom: 2em;
+}
+
+.chatia-description-container {
+  flex: 0 0 80%;
+  font-size: 1.5em;
+  line-height: 1.5;
+  color: var(--color-light);
+  text-align: left;
+}
+
+.chatia-image-container {
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.chatia-image-container img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 1em;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Responsive para el nuevo layout */
+@media (max-width: 768px) {
+  .chatia-title-full-width {
+    font-size: var(--font-mobile-title);
+  }
+  
+  .chatia-phrase-full-width {
+    font-size: var(--font-mobile-subtitle);
+  }
+  
+  .chatia-content-flex {
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .chatia-description-container {
+    flex: 0 0 100%;
+    font-size: var(--font-mobile-normal);
+  }
+  
+  .chatia-image-container {
+    flex: 0 0 100%;
+  }
+  
+  .chatia-image-container img {
+    max-height: 150px;
+  }
 }
 </style> 

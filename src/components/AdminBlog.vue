@@ -39,7 +39,19 @@
         <form class="blog-form" @submit.prevent="createPost">
           <label>Nuevo post:</label>
           <input v-model="newPostTitle" placeholder="Título" required />
-          <input v-model="newPostImage" placeholder="URL imagen" />
+          <div class="image-upload-container">
+            <input 
+              type="file" 
+              @change="handleImageUpload" 
+              accept="image/*" 
+              class="image-upload-input"
+              ref="imageInput"
+            />
+            <button type="button" @click="$refs.imageInput.click()" class="upload-btn">
+              {{ newPostImage ? 'Cambiar imagen' : 'Subir imagen' }}
+            </button>
+            <span v-if="newPostImage" class="image-preview">{{ newPostImage }}</span>
+          </div>
           <input v-model="newPostDescription" placeholder="Descripción" required />
           <select v-model="newPostCategory" required>
             <option value="" disabled>Selecciona categoría</option>
@@ -112,6 +124,7 @@ const newPostDescription = ref('')
 const newPostCategory = ref('')
 const newPostHtml = ref('')
 const loadingPost = ref(false)
+const uploadingImage = ref(false)
 const editingPost = ref<any|null>(null)
 const editPostTitle = ref('')
 const editPostImage = ref('')
@@ -125,6 +138,7 @@ const API_KEY_SESSION = 'admin_api_key'
 const inputKey = ref('')
 const hasAccess = ref(false)
 const error = ref(false)
+const imageInput = ref<HTMLInputElement | null>(null)
 
 function getApiKeyHeader() {
   const key = sessionStorage.getItem(API_KEY_SESSION)
@@ -237,6 +251,31 @@ async function createPost() {
   }
 }
 
+async function handleImageUpload(event: any) {
+  const file = event.target.files[0]
+  if (!file) return
+  
+  uploadingImage.value = true
+  try {
+    const formData = new FormData()
+    formData.append('image', file)
+    
+    const res = await axios.post(`${API_URL}/upload-image`, formData, {
+      headers: {
+        ...getApiKeyHeader(),
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    
+    newPostImage.value = res.data.url
+    alert('Imagen subida correctamente')
+  } catch (e: any) {
+    alert(e?.response?.data?.error || 'Error al subir imagen')
+  } finally {
+    uploadingImage.value = false
+  }
+}
+
 function startEditPost(post: any) {
   editingPost.value = post
   editPostTitle.value = post.title
@@ -306,9 +345,7 @@ function formatDate(dateStr: string) {
 onMounted(() => {
   fetchCategories()
   fetchPosts()
-})
-
-onMounted(() => {
+  
   const stored = sessionStorage.getItem(API_KEY_SESSION)
   if (stored) {
     hasAccess.value = true
@@ -339,13 +376,13 @@ function checkKey() {
 }
 /* Reutiliza los estilos de BlogOverlay para formularios y listas */
 .blog-admin-forms {
-  display: flex;
+  display: block;
   gap: 2em;
   margin-bottom: 2em;
 }
 .blog-form {
-  display: flex;
-  gap: 0.5em;
+  display: grid;
+  gap: 0.8em;
   align-items: center;
   background: #f7f7f7;
   padding: 1em;
@@ -372,6 +409,37 @@ function checkKey() {
 .blog-form button:disabled {
   background: #b1c2d5;
   cursor: not-allowed;
+}
+
+.image-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.image-upload-input {
+  display: none;
+}
+
+.upload-btn {
+  padding: 0.4em 1em;
+  border-radius: 0.5em;
+  border: none;
+  background: #27ae60;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background: #229954;
+}
+
+.image-preview {
+  font-size: 0.8em;
+  color: #666;
+  font-style: italic;
 }
 .category-list-admin {
   display: flex;
