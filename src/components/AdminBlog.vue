@@ -147,7 +147,7 @@ function getApiKeyHeader() {
 
 async function fetchCategories() {
   try {
-    const res = await axios.get(`${API_URL}/categories`, { headers: getApiKeyHeader() })
+    const res = await axios.get(`${API_URL}/blog/categories`, { headers: getApiKeyHeader() })
     categories.value = res.data
   } catch {}
 }
@@ -155,7 +155,7 @@ async function fetchCategories() {
 async function fetchPosts() {
   loading.value = true
   try {
-    const res = await axios.get(`${API_URL}/posts`, { headers: getApiKeyHeader() })
+    const res = await axios.get(`${API_URL}/blog/posts`, { headers: getApiKeyHeader() })
     posts.value = res.data
   } catch {
     posts.value = []
@@ -168,7 +168,7 @@ async function createCategory() {
   if (!newCategoryName.value) return
   loadingCat.value = true
   try {
-    await axios.post(`${API_URL}/categories`, {
+    await axios.post(`${API_URL}/blog/categories`, {
       name: newCategoryName.value,
       color: newCategoryColor.value
     }, { headers: getApiKeyHeader() })
@@ -195,7 +195,7 @@ function cancelEditCategory() {
 async function saveEditCategory(cat: any) {
   loadingEditCat.value = true
   try {
-    await axios.put(`${API_URL}/categories`, {
+    await axios.put(`${API_URL}/blog/categories`, {
       name: cat.name,
       update: {
         name: editCategoryName.value,
@@ -215,7 +215,7 @@ async function deleteCategory(cat: any) {
   if (!confirm('¿Seguro que deseas eliminar esta categoría?')) return
   loadingDeleteCat.value = true
   try {
-    await axios.delete(`${API_URL}/categories`, {
+    await axios.delete(`${API_URL}/blog/categories`, {
       data: { name: cat.name },
       headers: getApiKeyHeader()
     })
@@ -231,7 +231,7 @@ async function createPost() {
   if (!newPostTitle.value || !newPostCategory.value || !newPostDescription.value || !newPostHtml.value) return
   loadingPost.value = true
   try {
-    await axios.post(`${API_URL}/posts`, {
+    await axios.post(`${API_URL}/blog/posts`, {
       title: newPostTitle.value,
       image: newPostImage.value,
       description: newPostDescription.value,
@@ -260,7 +260,7 @@ async function handleImageUpload(event: any) {
     const formData = new FormData()
     formData.append('image', file)
     
-    const res = await axios.post(`${API_URL}/upload-image`, formData, {
+    const res = await axios.post(`${API_URL}/blog/upload-image`, formData, {
       headers: {
         ...getApiKeyHeader(),
         'Content-Type': 'multipart/form-data'
@@ -292,7 +292,7 @@ function cancelEdit() {
 async function saveEditPost(post: any) {
   loadingEdit.value = true
   try {
-    await axios.put(`${API_URL}/posts`, {
+    await axios.put(`${API_URL}/blog/posts`, {
       title: post.title,
       created_at: post.created_at,
       update: {
@@ -316,7 +316,7 @@ async function deletePost(post: any) {
   if (!confirm('¿Seguro que deseas eliminar este post?')) return
   loadingDelete.value = true
   try {
-    await axios.delete(`${API_URL}/posts`, {
+    await axios.delete(`${API_URL}/blog/posts`, {
       data: {
         title: post.title,
         created_at: post.created_at

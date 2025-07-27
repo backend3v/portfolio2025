@@ -15,6 +15,7 @@
     "clean": "rm -rf node_modules/.vite node_modules/.cache dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
+    "@vueuse/core": "^13.5.0",
     "axios": "^1.11.0",
     "chart.js": "^4.5.0",
     "flubber": "^0.4.2",
@@ -37,6 +38,7 @@
     "jiti": "^2.4.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.5.3",
+    "terser": "^5.43.1",
     "typescript": "^5.2.2",
     "vite": "^7.0.0",
     "vite-plugin-vue-devtools": "^7.7.7",

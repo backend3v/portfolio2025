@@ -1,6 +1,15 @@
 <template>
   <div class="text-overlay">
     <div class="text-frame">
+      <!-- Controles fijos fuera del área de scroll -->
+      <FixedControls 
+        v-if="showFixedControls && fixedControlsType" 
+        :type="fixedControlsType" 
+        @posts-loaded="handlePostsLoaded"
+        @categories-loaded="handleCategoriesLoaded"
+        @chat-response="handleChatResponse"
+      />
+      
       <div class="text-content" ref="textContentRef" style="overflow-y: auto;">
         <div ref="startMarkerRef" id="start-marker" style="height:1px;width:100%;margin-top:2%"></div>
         <template v-for="(item, idx) in sections" :key="idx">
@@ -91,10 +100,6 @@
             <template v-else-if="item.STYLE === 'titleGroupC'">
               <div class="section-underline section-underline-group" :style="{ backgroundColor: item.COLOR }"></div>
             </template>
-            <!-- Elimina la barra inferior para section-title -->
-            <!-- <template v-else-if="item.STYLE === 'title'">
-              <div class="section-underline section-underline-title" :style="{ backgroundColor: item.COLOR }"></div>
-            </template> -->
           </div>
         </template>
         <div ref="endMarkerRef" id="end-marker" style="height:1px;width:100%;margin-bottom:15%"></div>
@@ -109,14 +114,40 @@ import { activeSection } from '@/stores/activeSection'
 import sectionsData from '@/data/sections.json'
 import '../styles/OverlayContent.css';
 import ContactoTemplate from './templates/ContactoTemplate.vue'
-import ScrollInvite from './ScrollInvite.vue'
 import LogoComponent from './templates/LogoComponent.vue'
+import FixedControls from './FixedControls.vue'
 import { useOverlayScroll } from '@/utils/useOverlayScroll'
+
+// Props para controles fijos
+const props = defineProps<{
+  showFixedControls?: boolean
+  fixedControlsType?: 'blog' | 'chat'
+}>()
+
+// Emits para comunicación con el componente padre
+const emit = defineEmits<{
+  'posts-loaded': [posts: any[]]
+  'categories-loaded': [categories: any[]]
+  'chat-response': [response: any]
+}>()
 
 const textContentRef = ref<HTMLDivElement | null>(null)
 const startMarkerRef = ref<HTMLDivElement | null>(null)
 const endMarkerRef = ref<HTMLDivElement | null>(null)
 const sections = ref(sectionsData.sections)
+
+// Métodos para manejar eventos de FixedControls
+function handlePostsLoaded(posts: any[]) {
+  emit('posts-loaded', posts)
+}
+
+function handleCategoriesLoaded(categories: any[]) {
+  emit('categories-loaded', categories)
+}
+
+function handleChatResponse(response: any) {
+  emit('chat-response', response)
+}
 
 function formatContent(content: string) {
   return content.split('<=>').join('<br>');

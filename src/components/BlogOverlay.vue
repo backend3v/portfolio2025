@@ -1,51 +1,30 @@
 <template>
   <div class="text-overlay">
     <div class="text-frame">
+      <!-- Controles fijos fuera del área de scroll -->
+      <FixedControls 
+        type="blog" 
+        @posts-loaded="handlePostsLoaded"
+        @categories-loaded="handleCategoriesLoaded"
+      />
+      
       <div class="text-content" ref="textContentRef" style="overflow-y: auto;">
         <div ref="startMarkerRef" id="start-marker" style="height:1px;width:100%;margin-top:2%"></div>
-        <div class="blogia-controls">
-          <div class="blogia-multiselect-container">
-            <div class="blogia-multiselect" @click="toggleMultiselect">
-              <span class="blogia-multiselect-text">
-                {{ selectedCategories.length > 0 ? `${selectedCategories.length} categoría(s) seleccionada(s)` : 'Todas las categorías' }}
-              </span>
-              <span class="blogia-multiselect-arrow">▼</span>
-            </div>
-            <div v-if="isMultiselectOpen" class="blogia-multiselect-dropdown">
-              <label class="blogia-multiselect-option">
-                <input 
-                  type="checkbox" 
-                  :checked="selectedCategories.length === 0"
-                  @change="toggleAllCategories"
-                />
-                <span>Todas las categorías</span>
-              </label>
-              <label 
-                v-for="cat in categories" 
-                :key="cat.name" 
-                class="blogia-multiselect-option"
-              >
-                <input 
-                  type="checkbox" 
-                  :value="cat.name"
-                  v-model="selectedCategories"
-                  @change="handleCategoryChange"
-                />
-                <span>{{ cat.name }}</span>
-              </label>
-            </div>
-          </div>
-          <input v-model="searchText" placeholder="Buscar posts..." class="blogia-input" />
-          <button class="blogia-btn" @click="fetchPosts" :disabled="loading">Buscar</button>
-        </div>
         <div class="blogia-content">
           <div v-if="loading" class="blogia-spinner"></div>
           <div v-else-if="posts.length === 0" class="blogia-empty">No hay posts para mostrar.</div>
           <div v-else class="blogia-list" >
             <div v-for="post in posts" :key="post.title + post.created_at" class="blogia-item" :style="{color: 'white', borderColor: getCategoryColor(post.category)}">
-              <img v-if="post.image" :src="getImageUrl(post.image)"  class="blogia-img" />
-              <div class="blogia-info" :style="{color: getCategoryColor(post.category)}">{{ post.title }}
-                <h3 class="blogia-title" </h3>
+              <img 
+                v-if="post.image" 
+                :src="getImageUrl(post.image)" 
+                class="blogia-img"
+                loading="lazy"
+                :alt="post.title"
+                @error="handleImageError"
+              />
+              <div class="blogia-info" :style="{color: getCategoryColor(post.category)}">
+                {{ post.title }}
                 <div class="blogia-meta">
                   <span class="blogia-category" :style="{background: getCategoryColor(post.category)}">{{ post.category }}</span>
                   <span class="blogia-date">{{ formatDate(post.created_at) }}</span>
@@ -62,51 +41,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useOverlayScroll } from '@/utils/useOverlayScroll'
-import axios from 'axios'
-const API_URL = import.meta.env.VITE_API_URL
+import FixedControls from './FixedControls.vue'
+import { useCategoriesStore } from '@/stores/categories'
 
 const textContentRef = ref<HTMLElement | null>(null)
 const startMarkerRef = ref<HTMLElement | null>(null)
 const endMarkerRef = ref<HTMLElement | null>(null)
 useOverlayScroll(textContentRef, startMarkerRef, endMarkerRef)
 
-const categories = ref<{name: string, color: string}[]>([])
 const posts = ref<any[]>([])
-const selectedCategories = ref<string[]>([])
-const searchText = ref('')
 const loading = ref(false)
-const isMultiselectOpen = ref(false)
+const { setCategories, getCategoryColor } = useCategoriesStore()
 
-async function fetchCategories() {
-  try {
-    const res = await axios.get(`${API_URL}/blog/categories`)
-    categories.value = res.data
-  } catch {}
+// Métodos para manejar eventos de FixedControls
+function handlePostsLoaded(newPosts: any[]) {
+  posts.value = newPosts
 }
 
-async function fetchPosts() {
-  loading.value = true
-  try {
-    const body: any = { q: searchText.value }
-    if (selectedCategories.value.length > 0) {
-      body.categories = selectedCategories.value
-    } else {
-      body.categories = []
-    }
-    const res = await axios.post(`${API_URL}/blog/posts/search`, body)
-    posts.value = res.data
-  } catch {
-    posts.value = []
-  } finally {
-    loading.value = false
-  }
-}
-
-function getCategoryColor(cat: string) {
-  const c = categories.value.find(x => x.name === cat)
-  return c ? c.color : '#eee'
+function handleCategoriesLoaded(newCategories: any[]) {
+  console.log('Categorías cargadas en BlogOverlay:', newCategories)
+  setCategories(newCategories)
 }
 
 function getImageUrl(imagePath: string) {
@@ -128,48 +84,21 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString()
 }
 
-function toggleMultiselect() {
-  isMultiselectOpen.value = !isMultiselectOpen.value
-}
-
-function toggleAllCategories() {
-  if (selectedCategories.value.length === 0) {
-    // Si no hay categorías seleccionadas, seleccionar todas
-    selectedCategories.value = categories.value.map(cat => cat.name)
-  } else {
-    // Si hay categorías seleccionadas, deseleccionar todas
-    selectedCategories.value = []
-  }
-}
-
-function handleCategoryChange() {
-  // Si se selecciona una categoría específica, deseleccionar "Todas las categorías"
-  // Si se deseleccionan todas, automáticamente se selecciona "Todas las categorías"
-}
-
-// Cerrar el multiselector cuando se hace clic fuera
-function handleClickOutside(event: Event) {
-  const target = event.target as HTMLElement
-  if (!target.closest('.blogia-multiselect-container')) {
-    isMultiselectOpen.value = false
-  }
+function handleImageError(event: Event) {
+  const target = event.target as HTMLImageElement
+  target.style.display = 'none'
 }
 
 onMounted(() => {
-  fetchCategories()
-  fetchPosts()
-  // Agregar event listener para cerrar el multiselector
-  document.addEventListener('click', handleClickOutside)
+  // Los controles se manejan automáticamente en FixedControls
 })
 
 // Limpiar event listener al desmontar
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-
-watch([selectedCategories, searchText], () => {
-  // Si quieres búsqueda reactiva, descomenta:
-  // fetchPosts()
+  // Limpiar refs
+  textContentRef.value = null
+  startMarkerRef.value = null
+  endMarkerRef.value = null
 })
 </script>
 
@@ -233,14 +162,14 @@ watch([selectedCategories, searchText], () => {
   cursor: not-allowed;
 }
 .blogia-content {
-  margin-top: calc(var(--menu-height) + 80px);
+  margin-top: var(--content-margin-top);
   flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-blog-normal);
   min-height: 0;
-  padding: 2em;
+  padding: var(--content-padding);
   text-align: center;
 }
 .blogia-spinner {

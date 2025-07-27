@@ -55,8 +55,16 @@ onMounted(() => {
   window.scrollController = scrollController
 
   // Renderer
-  renderer = new THREE.WebGLRenderer({ canvas: threeCanvas.value!, antialias: false })
-  renderer.setClearColor('#283747') // color de fondo del cielo
+  renderer = new THREE.WebGLRenderer(
+    { 
+      canvas: threeCanvas.value!, 
+      antialias: false,
+      powerPreference: "high-performance",
+      alpha: true,
+      stencil: false,
+      depth: true
+    })
+  renderer.setClearColor('#283747', 1) // color de fondo del cielo
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(threeCanvas.value!.clientWidth, threeCanvas.value!.clientHeight, false)
 
@@ -242,7 +250,10 @@ function onResize() {
   if (!renderer || !camera || !threeCanvas.value) return
   const width = threeCanvas.value.clientWidth
   const height = threeCanvas.value.clientHeight
-  renderer.setSize(width, height, false)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) 
+  renderer.setSize(window.innerWidth, window.innerHeight, false)
+  renderer.shadowMap.enabled = false 
+  renderer.outputColorSpace = THREE.SRGBColorSpace
   camera.aspect = width / height
   camera.updateProjectionMatrix()
 }

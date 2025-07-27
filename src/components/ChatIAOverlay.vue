@@ -1,12 +1,14 @@
 <template>
   <div class="text-overlay">
     <div class="text-frame">
+      <!-- Controles fijos fuera del área de scroll -->
+      <FixedControls 
+        type="chat" 
+        @chat-response="handleChatResponse"
+      />
+      
       <div class="text-content" ref="textContentRef" style="overflow-y: auto;">
         <div ref="startMarkerRef" id="start-marker" style="height:1px;width:100%;margin-top:2%"></div>
-        <div class="inputChat">
-          <input v-model="inputValue" class="chat-input" placeholder="Escribe tu pregunta..." />
-          <button class="chat-btn" @click="sendRequest" :disabled="loading || !inputValue.trim()">Enviar</button>
-        </div>
         <div class="outputRequest">
           <div v-if="loading" class="spinner"></div>
           <template v-else-if="responseObj">
@@ -24,56 +26,32 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useOverlayScroll } from '@/utils/useOverlayScroll'
-import axios from 'axios'
 import ChatIAResponse from './ChatIAResponse.vue'
+import FixedControls from './FixedControls.vue'
 
 const textContentRef = ref<HTMLElement | null>(null)
 const startMarkerRef = ref<HTMLElement | null>(null)
 const endMarkerRef = ref<HTMLElement | null>(null)
 useOverlayScroll(textContentRef, startMarkerRef, endMarkerRef)
 
-const inputValue = ref('')
 const response = ref<string|null>(null)
 const responseObj = ref<any|null>(null)
 const loading = ref(false)
-const API_URL = import.meta.env.VITE_API_URL
 
-async function sendRequest() {
-  if (!inputValue.value.trim()) return;
-  loading.value = true;
-  response.value = null;
-  responseObj.value = null;
-  try {
-    const res = await axios.post(`${API_URL}/prompt`, {
-      prompt: inputValue.value,
-      lang: 'es'
-    });
-    if (typeof res.data === 'object' && res.data !== null) {
-      responseObj.value = res.data;
+// Método para manejar la respuesta del chat desde FixedControls
+function handleChatResponse(data: any) {
+  loading.value = false
+  if (data.error) {
+    response.value = data.error
+    responseObj.value = null
+  } else {
+    if (typeof data === 'object' && data !== null) {
+      responseObj.value = data
+      response.value = null
     } else {
-      // Intentar parsear si es string JSON
-      try {
-        const parsed = JSON.parse(res.data);
-        if (typeof parsed === 'object' && parsed !== null) {
-          responseObj.value = parsed;
-        } else {
-          response.value = res.data;
-        }
-      } catch {
-        response.value = res.data;
-      }
+      response.value = data
+      responseObj.value = null
     }
-  } catch (e) {
-    const err = e as any;
-    if (err.response && err.response.status === 429) {
-      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
-    } else if (err.response && err.response.data && err.response.data.error && err.response.data.error.includes('Límite de consultas')) {
-      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
-    } else {
-      response.value = 'Se ha cumplido con el limite de peticiones, no puedo generarte una respuesta';
-    }
-  } finally {
-    loading.value = false;
   }
 }
 </script>
