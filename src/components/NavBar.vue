@@ -27,6 +27,9 @@
       <li>
         <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">Chat IA</router-link>
       </li>
+      <li>
+        <button class="nav-btn contact-btn" @click="openContactModal">Contacto</button>
+      </li>
     </ul>
     
     <!-- Mobile Menu Overlay -->
@@ -62,17 +65,31 @@
       >
         Chat IA
       </router-link>
+      <button 
+        class="mobile-nav-btn contact-btn" 
+        @click="openContactModal"
+      >
+        Contacto
+      </button>
     </div>
+    
+    <!-- Contact Modal -->
+    <ContactModal 
+      :is-visible="isContactModalOpen" 
+      @close="closeContactModal" 
+    />
   </nav>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import ContactModal from './ContactModal.vue'
 import '../styles/NavBar.css'
 
 const $route = useRoute()
 const isMobileMenuOpen = ref(false)
+const isContactModalOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -89,10 +106,24 @@ const closeMobileMenu = () => {
   document.body.style.overflow = ''
 }
 
+const openContactModal = () => {
+  isContactModalOpen.value = true
+  closeMobileMenu() // Close mobile menu if open
+}
+
+const closeContactModal = () => {
+  isContactModalOpen.value = false
+}
+
 // Handle escape key
 const handleKeydown = (event: any) => {
-  if (event.key === 'Escape' && isMobileMenuOpen.value) {
-    closeMobileMenu()
+  if (event.key === 'Escape') {
+    if (isMobileMenuOpen.value) {
+      closeMobileMenu()
+    }
+    if (isContactModalOpen.value) {
+      closeContactModal()
+    }
   }
 }
 
