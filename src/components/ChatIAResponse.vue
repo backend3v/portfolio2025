@@ -30,13 +30,13 @@
     
     <!-- Noticias IA -->
     <div v-if="data.news && Array.isArray(data.news) && data.news.length" class="chatia-news">
-      <div class="news-title-centered">Noticias</div>
+      <div class="news-title-centered">{{ t('chatiaresponse.news') }}</div>
       <div class="news-title-bar"></div>
       <div class="news-list">
         <div v-for="(item, idx) in data.news" :key="idx" class="news-item">
           <div class="news-valor"><b>{{ item.titulo || item.title }}</b></div>
-          <div v-if="item.fuente || item.source" class="news-fuente">Fuente: {{ item.fuente || item.source }}</div>
-          <div v-if="item.fecha || item.date" class="news-fecha">Fecha: {{ item.fecha || item.date }}</div>
+          <div v-if="item.fuente || item.source" class="news-fuente">{{ t('chatiaresponse.source') }}: {{ item.fuente || item.source }}</div>
+          <div v-if="item.fecha || item.date" class="news-fecha">{{ t('chatiaresponse.date') }}: {{ item.fecha || item.date }}</div>
         </div>
       </div>
     </div>
@@ -46,7 +46,10 @@
 <script setup lang="ts">
 import { defineProps, computed } from 'vue'
 import LineChart from './LineChart.vue'
+import { useI18n } from 'vue-i18n'
 const props = defineProps<{ data: any }>()
+
+const { t } = useI18n()
 
 type ComparativeRow = (string | number)[];
 type Comparative = ComparativeRow[];
@@ -85,7 +88,7 @@ function capitalizeFirst(text: string) {
 }
 
 const chartData = computed(() => getChartData(props.data.comparative, props.data.colors));
-const chartOptions = {
+const chartOptions = computed(() => ({
   responsive: true,
   plugins: {
     legend: {
@@ -116,7 +119,7 @@ const chartOptions = {
       },
       title: {
         display: true,
-        text: 'Eje X',
+        text: t('chatiaresponse.x_axis'),
         color: '#f7dc6f',
         font: { size: 18 }
       },
@@ -134,7 +137,7 @@ const chartOptions = {
       },
       title: {
         display: true,
-        text: 'Eje Y',
+        text: t('chatiaresponse.y_axis'),
         color: '#f7dc6f',
         font: { size: 18 }
       },
@@ -144,7 +147,7 @@ const chartOptions = {
       }
     }
   }
-};
+}));
 </script>
 
 <style scoped>

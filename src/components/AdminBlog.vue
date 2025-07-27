@@ -39,18 +39,9 @@
         <form class="blog-form" @submit.prevent="createPost">
           <label>Nuevo post:</label>
           <input v-model="newPostTitle" placeholder="Título" required />
-          <div class="image-upload-container">
-            <input 
-              type="file" 
-              @change="handleImageUpload" 
-              accept="image/*" 
-              class="image-upload-input"
-              ref="imageInput"
-            />
-            <button type="button" @click="triggerImageInput" class="upload-btn">
-              {{ uploadingImage ? 'Subiendo...' : (newPostImage ? 'Cambiar imagen' : 'Subir imagen') }}
-            </button>
-            <span v-if="newPostImage" class="image-preview">{{ newPostImage }}</span>
+          <div class="icon-input-container">
+            <input v-model="newPostImage" placeholder="Clase de icono Font Awesome (ej: fa-brands fa-python)" required />
+            <i v-if="newPostImage" :class="newPostImage + ' icon-preview'" aria-hidden="true"></i>
           </div>
           <input v-model="newPostDescription" placeholder="Descripción" required />
           <select v-model="newPostCategory" required>
@@ -66,9 +57,12 @@
           <img v-if="post.image" :src="post.image" class="blog-post-img" />
           <div class="blog-post-content">
             <template v-if="editingPost && editingPost.title === post.title && editingPost.created_at === post.created_at">
-              <form class="edit-post-form" @submit.prevent="saveEditPost(post)">
+              <form v-if="editingPost && editingPost.title === post.title && editingPost.created_at === post.created_at" class="edit-post-form" @submit.prevent="saveEditPost(post)">
                 <input v-model="editPostTitle" placeholder="Título" required />
-                <input v-model="editPostImage" placeholder="URL imagen" />
+                <div class="icon-input-container">
+                  <input v-model="editPostImage" placeholder="Clase de icono Font Awesome (ej: fa-brands fa-python)" required />
+                  <i v-if="editPostImage" :class="editPostImage + ' icon-preview'" aria-hidden="true"></i>
+                </div>
                 <input v-model="editPostDescription" placeholder="Descripción" required />
                 <select v-model="editPostCategory" required>
                   <option value="" disabled>Selecciona categoría</option>
@@ -569,5 +563,19 @@ function triggerImageInput() {
   color: #e74c3c;
   margin-top: 0.5em;
   font-size: 1em;
+}
+.icon-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.icon-preview {
+  font-size: 2em;
+  color: var(--color-light-gold);
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style> 

@@ -75,10 +75,8 @@ const inputValue = ref('')
 
 // Funciones para Blog
 async function fetchCategories() {
-  try {
-    console.log('Fetching categories from:', `${API_URL}/blog/categories`)
+  try {   
     const res = await axios.get(`${API_URL}/blog/categories`)
-    console.log('Categories response:', res.data)
     categories.value = res.data
     setCategories(res.data) // Actualizar el store
     emit('categories-loaded', res.data)
@@ -240,7 +238,6 @@ onUnmounted(() => {
   border-radius: 1em;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  max-height: 200px;
   overflow-y: auto;
   margin-top: 0.5em;
 }

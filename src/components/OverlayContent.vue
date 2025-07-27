@@ -109,14 +109,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, defineExpose, shallowRef } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, defineExpose, shallowRef, computed } from 'vue'
 import { activeSection } from '@/stores/activeSection'
-import sectionsData from '@/data/sections.json'
 import '../styles/OverlayContent.css';
 import ContactoTemplate from './templates/ContactoTemplate.vue'
 import LogoComponent from './templates/LogoComponent.vue'
 import FixedControls from './FixedControls.vue'
 import { useOverlayScroll } from '@/utils/useOverlayScroll'
+import { useI18n } from 'vue-i18n'
 
 // Props para controles fijos
 const props = defineProps<{
@@ -134,7 +134,10 @@ const emit = defineEmits<{
 const textContentRef = ref<HTMLDivElement | null>(null)
 const startMarkerRef = ref<HTMLDivElement | null>(null)
 const endMarkerRef = ref<HTMLDivElement | null>(null)
-const sections = ref(sectionsData.sections)
+
+// Usar vue-i18n para obtener las secciones traducidas
+const { tm } = useI18n()
+const sections = computed(() => tm('sections'))
 
 // Métodos para manejar eventos de FixedControls
 function handlePostsLoaded(posts: any[]) {
@@ -182,7 +185,7 @@ function scrollToSectionById(id: string) {
 }
 
 function getTemplateComponent(templateName: string) {
-  if (templateName === 'contacto') {
+  if (templateName === 'contacto' || templateName === 'contact') {
     return ContactoTemplate
   }
   if (templateName === 'logo') {
@@ -191,7 +194,7 @@ function getTemplateComponent(templateName: string) {
   return null
 }
 
-function isLinkItem(item: any): item is { LINK: string } {
+function isLinkItem(item: any): boolean {
   return item && typeof item.LINK === 'string';
 }
 

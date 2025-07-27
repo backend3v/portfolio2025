@@ -2,30 +2,30 @@
   <div v-if="isVisible" class="contact-modal-overlay" @click="closeModal">
     <div class="contact-modal" @click.stop>
       <div class="contact-modal-header">
-        <h2>Enviar Mensaje</h2>
+        <h2>{{ t('contact.send_message') }}</h2>
         <button class="close-btn" @click="closeModal">&times;</button>
       </div>
       
       <form class="contact-form" @submit.prevent="sendEmail">
         <!-- Eliminado campo de asunto -->
         <div class="form-group">
-          <label for="message">Mensaje:</label>
+          <label for="message">{{ t('contact.message_label') }}</label>
           <textarea 
             id="message"
             v-model="formData.message" 
             required 
-            placeholder="Escribe tu mensaje aquí..."
+            :placeholder="t('contact.message_placeholder')"
             rows="6"
           ></textarea>
         </div>
         
         <div class="form-actions">
           <button type="button" class="btn-cancel" @click="closeModal">
-            Cancelar
+            {{ t('contact.cancel') }}
           </button>
           <button type="submit" class="btn-send" :disabled="loading">
-            <span v-if="loading">Enviando...</span>
-            <span v-else>Enviar</span>
+            <span v-if="loading">{{ t('contact.sending') }}</span>
+            <span v-else>{{ t('contact.send') }}</span>
           </button>
         </div>
       </form>
@@ -41,6 +41,9 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   isVisible: boolean
@@ -78,18 +81,18 @@ async function sendEmail() {
     
     if (response.data.success) {
       messageType.value = 'success'
-      message.value = 'Email enviado correctamente'
+      message.value = t('contact.success')
       resetForm()
       setTimeout(() => {
         closeModal()
       }, 2000)
     } else {
       messageType.value = 'error'
-      message.value = response.data.error || 'Error al enviar el email'
+      message.value = response.data.error || t('contact.error')
     }
   } catch (error: any) {
     messageType.value = 'error'
-    message.value = error.response?.data?.error || 'Error de conexión'
+    message.value = error.response?.data?.error || t('contact.connection_error')
   } finally {
     loading.value = false
   }

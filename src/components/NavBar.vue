@@ -19,16 +19,23 @@
     <!-- Desktop Menu -->
     <ul class="nav-list desktop-menu">
       <li>
-        <router-link class="nav-btn" :class="{ selected: $route.path === '/' }" to="/">Portafolio</router-link>
+        <router-link class="nav-btn" :class="{ selected: $route.path === '/' }" to="/">{{ t('navbar.portfolio') }}</router-link>
       </li>
       <li>
-        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/blog') }" to="/blog">Blog</router-link>
+        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/blog') }" to="/blog">{{ t('navbar.blog') }}</router-link>
       </li>
       <li>
-        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">Aplicaciones</router-link>
+        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">{{ t('navbar.apps') }}</router-link>
       </li>
       <li>
-        <button class="nav-btn contact-btn" @click="openContactModal">Contacto</button>
+        <button class="nav-btn contact-btn" @click="openContactModal">{{ t('navbar.contact') }}</button>
+      </li>
+      <li>
+        <select v-model="locale" class="lang-select">
+          <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+            {{ lang.label }}
+          </option>
+        </select>
       </li>
     </ul>
     
@@ -47,7 +54,7 @@
         :class="{ selected: $route.path === '/' }"
         @click="closeMobileMenu"
       >
-        Portafolio
+        {{ t('navbar.portfolio') }}
       </router-link>
       <router-link 
         to="/blog" 
@@ -55,7 +62,7 @@
         :class="{ selected: $route.path.startsWith('/blog') }"
         @click="closeMobileMenu"
       >
-        Blog
+        {{ t('navbar.blog') }}
       </router-link>
       <router-link 
         to="/chat-ia" 
@@ -63,14 +70,21 @@
         :class="{ selected: $route.path.startsWith('/chat-ia') }"
         @click="closeMobileMenu"
       >
-        Aplicaciones
+        {{ t('navbar.apps') }}
       </router-link>
       <button 
         class="mobile-nav-btn contact-btn" 
         @click="openContactModal"
       >
-        Contactos
+        {{ t('navbar.contacts') }}
       </button>
+      <div style="margin-top: 1em; text-align: center;">
+        <select v-model="locale" class="lang-select">
+          <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+            {{ lang.label }}
+          </option>
+        </select>
+      </div>
     </div>
     
     <!-- Contact Modal -->
@@ -86,6 +100,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import ContactModal from './ContactModal.vue'
 import '../styles/NavBar.css'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const $route = useRoute()
 const isMobileMenuOpen = ref(false)
@@ -137,4 +154,28 @@ onUnmounted(() => {
   // Ensure body scroll is restored
   document.body.style.overflow = ''
 })
+
+const languages = [
+  { code: 'es', label: '🇪🇸 ES' },
+  { code: 'en', label: '🇺🇸 EN' }
+]
 </script>
+
+<style scoped>
+.lang-select {
+  background: transparent;
+  color: var(--color-light-gold);
+  border: 1px solid var(--color-light-gold);
+  border-radius: 1em;
+  padding: 0.3em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  margin-left: 1em;
+  cursor: pointer;
+  outline: none;
+  transition: border 0.2s;
+}
+.lang-select:focus {
+  border: 2px solid var(--color-light-gold);
+}
+</style>

@@ -1,0 +1,281 @@
+{
+    "sections": [
+      {
+        "GROUP": "presentation",
+        "SECTION": "logo",
+        "TEMPLATE": "logo",
+        "COLOR": "#3498db",
+        "STYLE": "text"
+      },
+      {
+        "GROUP": "presentation",
+        "SECTION": "aboutme",
+        "STYLE": "titleName",
+        "COLOR": "#3498db",
+        "IMAGE": "logoed",
+        "CONTENT": "Edward Gonzalez",
+        "ID": "presentation"
+      },
+      {
+        "GROUP": "presentation",
+        "SECTION": "aboutme",
+        "STYLE": "subtitle",
+        "COLOR": "#85c1e9",
+        "CONTENT": "Software Developer"
+      },
+      {
+        "GROUP": "presentation",
+        "SECTION": "aboutme",
+        "STYLE": "aboutme",
+        "COLOR": "white",
+        "CONTENT": "With more than 7 years of experience in several startups including Stradata, Symplfica (Top 5 most innovative companies in Latin America by FAST COMPANY 2023), mangosoft, and tulpep. Developing software for various industries, I have acquired the experience and ability to work independently."
+      },
+      {
+        "GROUP": "presentation",
+        "SECTION": "contact",
+        "STYLE": "titleGroupB",
+        "COLOR": "#3498db",
+        "CONTENT": "Contact",
+        "ID": "contact"
+      },
+      {
+        "GROUP": "presentation",
+        "SECTION": "contact",
+        "TEMPLATE": "contact",
+        "COLOR": "#3498db",
+        "STYLE": "titleGroupC"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "skills",
+        "STYLE": "titleGroup",
+        "COLOR": "#eb984e",
+        "ICONS": [
+          "fa-solid fa-file-code",
+          "fa-solid fa-folder-open",
+          "fa-brands fa-android",
+          "fa-brands fa-apple",
+          "fa-brands fa-windows",
+          "fa-brands fa-linux"
+        ],
+        "CONTENT": "Skills",
+        "ID": "skills"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "web",
+        "STYLE": "title",
+        "COLOR": "#f8c471",
+        "ICONS": [
+          "fa-solid fa-file-code"
+        ],
+        "IMAGE": "web",
+        "CONTENT": "Web Development"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "web",
+        "STYLE": "normal",
+        "COLOR": "#f8c471",
+        "CONTENT": "Development of Web Applications and Microservices, Implementation of RESTful APIs, Frontend development using modern frameworks, Integration of SQL and NoSQL databases in web applications, Web performance optimization and SEO"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "data",
+        "STYLE": "title",
+        "COLOR": "#f8c471",
+        "ICONS": [
+          "fa-solid fa-folder-open"
+        ],
+        "IMAGE": "data",
+        "CONTENT": "Data"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "data",
+        "STYLE": "normal",
+        "COLOR": "#f8c471",
+        "IMAGE": "data",
+        "CONTENT": "Data Extraction, Processing and Loading, Predictive and Descriptive Statistical Data Analysis, Management of Relational and Non-Relational Databases, Development of interactive dashboards, Data Visualization, SQL query optimization for better performance, Development of Machine Learning models"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "mobile",
+        "STYLE": "title",
+        "COLOR": "#f8c471",
+        "ICONS": [
+          "fa-brands fa-android",
+          "fa-brands fa-apple"
+        ],
+        "IMAGE": "mobile",
+        "CONTENT": "Mobile Development"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "mobile",
+        "STYLE": "normal",
+        "COLOR": "#f8c471",
+        "CONTENT": "Development of Mobile Applications for iOS and Android, Implementation of REST API in mobile applications, Integration of cloud services in mobile apps, Performance and user experience optimization on mobile, Deployment and publishing on App Store and Google Play"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "desktop",
+        "STYLE": "title",
+        "COLOR": "#f8c471",
+        "ICONS": [
+          "fa-brands fa-windows",
+          "fa-brands fa-linux"
+        ],
+        "IMAGE": "desktop",
+        "CONTENT": "Desktop Applications"
+      },
+      {
+        "GROUP": "skills",
+        "SECTION": "desktop",
+        "STYLE": "normal",
+        "COLOR": "#f8c471",
+        "CONTENT": "Development of Desktop Applications for Linux environments, Process integration and automation, Creation of graphical user interfaces (GUI) with Qt and Glade, Implementation of local databases in desktop applications, Development of system administration tools, Integration of web services in desktop applications"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "projectstitle",
+        "STYLE": "titleGroup",
+        "COLOR": "#a569bd",
+        "ICONS": [
+          "fa-brands fa-python",
+          "fa-brands fa-aws",
+          "fa-brands fa-docker",
+          "fa-brands fa-ethereum",
+          "fa-brands fa-php",
+          "fa-brands fa-angular",
+          "fa-brands fa-windows"
+        ],
+        "IMAGE": "notary",
+        "CONTENT": "Projects",
+        "ID": "projects"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "notary",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "ICONS": [
+          "fa-brands fa-ethereum",
+          "fa-brands fa-python",
+          "fa-brands fa-aws",
+          "fa-brands fa-docker"
+        ],
+        "IMAGE": "notary",
+        "CONTENT": "Notary Module (Mango Soft)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "notary",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Document notarization, Research on blockchain technologies, Development of smart contracts in Solidity; to test different types of contracts <=> | Solidity, Python, DynamoDb, AWS Terraform, Docker |"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "forms",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "IMAGE": "forms",
+        "ICONS": [
+          "fa-brands fa-python",
+          "fa-brands fa-aws",
+          "fa-brands fa-docker",
+          "fa-brands fa-angular"
+        ],
+        "CONTENT": "Forms Module (Mango Soft)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "forms",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Creation of forms, Drag & drop widget interface, Automated deployment of this module for various clients. The project was successfully completed and is in production <=> | Python, Angular, Typescript, AWS, Terraform, Docker, Git |"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "autocolte",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "IMAGE": "forms",
+        "ICONS": [
+          "fa-brands fa-python",
+          "fa-brands fa-windows",
+          "fa-brands fa-powershell"
+        ],
+        "CONTENT": "Format Automation (Coltefinanciera)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "autocolte",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Creation of a desktop application to automate the creation of a format, development of an installer for Windows, creation of a modern UI, use of advanced SQL statements <=> | Python, Windows Script, Oracle |"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "sagri",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "IMAGE": "forms",
+        "ICONS": [
+          "fa-brands fa-python",
+          "fa-brands fa-azure",
+          "fa-brands fa-mongodb"
+        ],
+        "CONTENT": "SAGRILAFT Application (Stradata)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "sagri",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Creation of AI models to apply SAGRILAFT regulations and find risks or non-compliance. Support to the Data Science department, Database administration <=> | Python, SciKitLearn, Azure, MongoDb |"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "formatsbiz",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "IMAGE": "forms",
+        "ICONS": [
+          "fa-brands fa-php",
+          "fa-brands fa-python",
+          "fa-brands fa-docker"
+        ],
+        "CONTENT": "Format Generator Application (Biznaga)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "formatsbiz",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Creation of a Web Application for generating formats with enriched multimedia for marketing campaigns <=> |PHP, Python, composer, Postgresql, Docker, PowerShell|"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "simpli",
+        "STYLE": "title",
+        "COLOR": "#bb8fce",
+        "IMAGE": "forms",
+        "ICONS": [
+          "fa-brands fa-php",
+          "fa-brands fa-python",
+          "fa-brands fa-docker",
+          "fa-brands fa-aws"
+        ],
+        "CONTENT": "Web Application 2.0 (Symplifica)"
+      },
+      {
+        "GROUP": "projects",
+        "SECTION": "simpli",
+        "STYLE": "normal",
+        "COLOR": "#bb8fce",
+        "CONTENT": "Development of Web Application 2.0, taking into account the experience and state of the company at the time of project execution <=> | PHP(Symphony), Python, Ruby on Rails, Postgresql, Docker, AWS |"
+      }
+    ]
+  }

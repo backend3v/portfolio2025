@@ -8,7 +8,6 @@ export class ScrollController {
   private hasSetScrolled = false
 
   constructor() {
-    console.log('ScrollController initialized')
     this.init()
   }
 
@@ -19,11 +18,9 @@ export class ScrollController {
   }
 
   private initWheelEvents() {
-    console.log('Initializing wheel events')
     
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault()
-      console.log('Wheel event:', e.deltaY)
       // Planeta gira sobre X (más lento), cielo sobre Y
       this.rotationX += e.deltaY * this.scrollSpeed * 0.3
       this.rotationY += e.deltaY * this.scrollSpeed * 0.5
@@ -37,7 +34,6 @@ export class ScrollController {
   }
 
   private initTouchEvents() {
-    console.log('Initializing touch events')
     
     let startY = 0
     let isTouching = false
@@ -45,7 +41,6 @@ export class ScrollController {
     const handleTouchStart = (e: TouchEvent) => {
       isTouching = true
       startY = e.touches[0].clientY
-      console.log('Touch start:', startY)
     }
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -54,7 +49,6 @@ export class ScrollController {
       e.preventDefault()
       const currentY = e.touches[0].clientY
       const deltaY = startY - currentY
-      console.log('Touch move, deltaY:', deltaY)
       
       // Planeta gira sobre X (más lento), cielo sobre Y
       this.rotationX += deltaY * this.scrollSpeed * 0.03
@@ -69,7 +63,6 @@ export class ScrollController {
 
     const handleTouchEnd = () => {
       isTouching = false
-      console.log('Touch end')
     }
 
     document.addEventListener('touchstart', handleTouchStart, { passive: true })

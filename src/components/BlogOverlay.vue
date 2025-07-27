@@ -14,15 +14,8 @@
           <div v-if="loading" class="blogia-spinner"></div>
           <div v-else-if="posts.length === 0" class="blogia-empty">No hay posts para mostrar.</div>
           <div v-else class="blogia-list" >
-            <div v-for="post in posts" :key="post.title + post.created_at" class="blogia-item" :style="{color: 'white', borderColor: getCategoryColor(post.category)}">
-              <img 
-                v-if="post.image" 
-                :src="getImageUrl(post.image)" 
-                class="blogia-img"
-                loading="lazy"
-                :alt="post.title"
-                @error="handleImageError"
-              />
+            <div v-for="post in posts" :key="post.title + post.created_at" class="blogia-item" :style="{color: 'white', borderColor: getCategoryColor(post.category)}" @click="openModal(post)">
+              <i v-if="post.image" :class="post.image + ' blogia-img'" aria-hidden="true" :style="{ color: getCategoryColor(post.category)}"></i>
               <div class="blogia-info" :style="{color: getCategoryColor(post.category)}">
                 {{ post.title }}
                 <div class="blogia-meta">
@@ -35,6 +28,23 @@
           </div>
         </div>
         <div ref="endMarkerRef" id="end-marker" style="height:1px;width:100%;margin-bottom:15%"></div>
+      </div>
+    </div>
+    <!-- Modal para mostrar el HTML del post -->
+    <div v-if="showModal" class="blog-modal-overlay" @click.self="closeModal">
+      <div class="blog-modal blog-modal-fullwidth">
+        <button class="blog-modal-close" @click="closeModal">&times;</button>
+        <div class="blog-modal-content-html">
+          <iframe
+            v-if="selectedPost?.html"
+            class="blog-html-iframe"
+            :srcdoc="wrapHtml(selectedPost.html)"
+            frameborder="0"
+            width="100%"
+            height="100%"
+            style="min-height:60vh;"
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -55,27 +65,26 @@ const posts = ref<any[]>([])
 const loading = ref(false)
 const { setCategories, getCategoryColor } = useCategoriesStore()
 
+// Modal state
+const showModal = ref(false)
+const selectedPost = ref<any | null>(null)
+
+function openModal(post: any) {
+  selectedPost.value = post
+  showModal.value = true
+}
+function closeModal() {
+  showModal.value = false
+  selectedPost.value = null
+}
+
 // Métodos para manejar eventos de FixedControls
 function handlePostsLoaded(newPosts: any[]) {
   posts.value = newPosts
 }
 
 function handleCategoriesLoaded(newCategories: any[]) {
-  console.log('Categorías cargadas en BlogOverlay:', newCategories)
   setCategories(newCategories)
-}
-
-function getImageUrl(imagePath: string) {
-  // Si es una URL completa, la devuelve tal como está
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-    return imagePath
-  }
-  // Si es una ruta local, la convierte a URL relativa
-  if (imagePath.startsWith('/src/assets/')) {
-    return imagePath.replace('/src/assets/', '/src/assets/')
-  }
-  // Por defecto, asume que es una ruta local
-  return imagePath
 }
 
 function formatDate(dateStr: string) {
@@ -84,9 +93,98 @@ function formatDate(dateStr: string) {
   return d.toLocaleDateString()
 }
 
-function handleImageError(event: Event) {
-  const target = event.target as HTMLImageElement
-  target.style.display = 'none'
+function wrapHtml(html: string) {
+  return `
+    <html>
+      <head>
+        <style>
+          html, body { max-width: 100vw; overflow-x: hidden; }
+          body { color: white; background: transparent; font-size: 1.1em; line-height: 1.6; margin: 0; padding: 2em 1em; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+          main { width: 100%; max-width: 800px; margin: 0 auto; box-sizing: border-box; }
+          a { color: #f7dc6f; }
+          pre { white-space: pre-wrap; position: relative; }
+          code { background-color: #222; border: 1px solid #999; display: block; padding: 20px; border-radius: 8px; }
+          .copy-btn, .download-btn {
+            position: absolute;
+            top: 8px;
+            background: #f7dc6f; color: #222;
+            border: none; border-radius: 5px;
+            padding: 0.3em 0.8em; font-size: 0.95em; font-weight: bold;
+            cursor: pointer; z-index: 2;
+            transition: background 0.2s;
+          }
+          .copy-btn { right: 8px; }
+          .download-btn { right: 90px; }
+          .copy-btn:hover, .download-btn:hover { background: #ffe066; }
+          .copied-msg {
+            position: absolute; top: 8px; right: 170px;
+            background: #222; color: #f7dc6f; padding: 0.2em 0.7em;
+            border-radius: 5px; font-size: 0.9em; opacity: 0.95;
+            pointer-events: none; z-index: 3;
+            transition: opacity 0.3s;
+          }
+          ::-webkit-scrollbar { width: 10px; background: #222; }
+          ::-webkit-scrollbar-thumb { background: #f7dc6f; border-radius: 5px; }
+          ::selection { background: #f7dc6f33; }
+        </style>
+      </head>
+      <body>
+        <main>${html}</main>
+        <script>
+          document.querySelectorAll('pre > code').forEach(function(codeBlock) {
+            var pre = codeBlock.parentElement;
+            pre.style.position = 'relative';
+            // Botón copiar (siempre)
+            var btnCopy = document.createElement('button');
+            btnCopy.innerText = 'Copiar';
+            btnCopy.className = 'copy-btn';
+            btnCopy.onclick = function(e) {
+              e.stopPropagation();
+              var text = codeBlock.innerText;
+              navigator.clipboard.writeText(text);
+              var msg = document.createElement('span');
+              msg.className = 'copied-msg';
+              msg.innerText = '¡Copiado!';
+              pre.appendChild(msg);
+              setTimeout(function() { pre.removeChild(msg); }, 1200);
+            };
+            pre.appendChild(btnCopy);
+            // Botón descargar solo si tiene la clase 'download-code'
+            if (codeBlock.classList.contains('download-code')) {
+              var btnDownload = document.createElement('button');
+              btnDownload.innerText = 'Descargar';
+              btnDownload.className = 'download-btn';
+              btnDownload.onclick = function(e) {
+                e.stopPropagation();
+                var text = codeBlock.innerText;
+                var filename = codeBlock.getAttribute('data-filename');
+                if (!filename) {
+                  if (codeBlock.classList.contains('language-bash') || text.trim().startsWith('#!/bin/bash')) {
+                    filename = 'script.sh';
+                  } else if (codeBlock.classList.contains('language-python')) {
+                    filename = 'script.py';
+                  } else {
+                    filename = 'code.txt';
+                  }
+                }
+                var blob = new Blob([text], {type: 'text/plain'});
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(function() {
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(link.href);
+                }, 100);
+              };
+              pre.appendChild(btnDownload);
+            }
+          });
+        <\/script>
+      </body>
+    </html>
+  `;
 }
 
 onMounted(() => {
@@ -197,6 +295,7 @@ onUnmounted(() => {
 }
 .blogia-item {
   display: flex;
+  cursor: pointer;
   gap: 2em;
   border-radius: 1em;
   border: 3px solid transparent;
@@ -210,11 +309,12 @@ onUnmounted(() => {
   background-color: rgba(0,0,0,0.15);
 }
 .blogia-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 1em;
-  background: #eee;
+  font-size: 3.5em;
+  min-width: 60px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .blogia-info {
   flex: 1;
@@ -466,5 +566,65 @@ onUnmounted(() => {
     font-size: var(--font-mobile-normal);
     padding: 0.4em 0.8em;
   }
+}
+.blog-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.blog-modal {
+  background: var(--color-bg);
+  border-radius: 1em;
+  width: 100vw;
+  max-width: 100vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2em 1.5em 1.5em 1.5em;
+  position: relative;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+}
+.blog-modal-fullwidth {
+  width: 96vw;
+  max-width: 100vw;
+  min-height: 60vh;
+  padding: 0;
+  border-radius: 0;
+}
+.blog-modal-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: transparent;
+  border: none;
+  color: var(--color-light-gold);
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 10;
+}
+.blog-modal-content-html {
+  width: 96vw;
+  min-height: 60vh;
+  height: 80vh;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.blog-html-iframe {
+  width: 100vw;
+  height: 80vh;
+  border: none;
+  background: transparent;
+  overflow-x: hidden;
+  display: block;
 }
 </style> 
