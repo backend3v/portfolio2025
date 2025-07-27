@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://backend:8080
+    networks:
+      - frontendnet
+    depends_on:
+      - backend
+  backend:
+    build: ../backend_web
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    networks:
+      - frontendnet
+networks:
+  frontendnet:
+    driver: bridge 
