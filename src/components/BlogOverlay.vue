@@ -110,7 +110,6 @@ onUnmounted(() => {
   flex-direction: column;
   box-sizing: border-box;
   font-size: 0.5em;
-  padding-top: var(--menu-height); /* Agregar padding para evitar que quede debajo de la navbar */
 }
 .blogia-controls {
   position: fixed;

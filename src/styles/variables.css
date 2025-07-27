@@ -49,3 +49,24 @@
   --backface-visibility: hidden;
   --perspective: 1000px;
 }
+
+/* Media queries para hacer las variables responsivas */
+@media (max-width: 768px) {
+  :root {
+    --menu-height: 3.5rem;
+    --search-controls-height: 4rem;
+    --search-controls-padding: 0.8em 1.5em;
+    --search-controls-gap: 0.8em;
+    --content-padding: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --menu-height: 3rem;
+    --search-controls-height: 3.5rem;
+    --search-controls-padding: 0.6em 1em;
+    --search-controls-gap: 0.6em;
+    --content-padding: 1em;
+  }
+}

@@ -7,17 +7,7 @@
       </div>
       
       <form class="contact-form" @submit.prevent="sendEmail">
-        <div class="form-group">
-          <label for="subject">Asunto:</label>
-          <input 
-            id="subject"
-            v-model="formData.subject" 
-            type="text" 
-            required 
-            placeholder="Asunto del mensaje"
-          />
-        </div>
-        
+        <!-- Eliminado campo de asunto -->
         <div class="form-group">
           <label for="message">Mensaje:</label>
           <textarea 
@@ -66,7 +56,6 @@ const message = ref('')
 const messageType = ref<'success' | 'error'>('success')
 
 const formData = reactive({
-  subject: '',
   message: ''
 })
 
@@ -76,7 +65,6 @@ function closeModal() {
 }
 
 function resetForm() {
-  formData.subject = ''
   formData.message = ''
   message.value = ''
 }
@@ -86,7 +74,7 @@ async function sendEmail() {
   message.value = ''
   
   try {
-    const response = await axios.post(`${API_URL}/send-email`, formData)
+    const response = await axios.post(`${API_URL}/send-email`, { message: formData.message })
     
     if (response.data.success) {
       messageType.value = 'success'

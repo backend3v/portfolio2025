@@ -25,7 +25,7 @@
         <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/blog') }" to="/blog">Blog</router-link>
       </li>
       <li>
-        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">Chat IA</router-link>
+        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">Aplicaciones</router-link>
       </li>
       <li>
         <button class="nav-btn contact-btn" @click="openContactModal">Contacto</button>
@@ -63,13 +63,13 @@
         :class="{ selected: $route.path.startsWith('/chat-ia') }"
         @click="closeMobileMenu"
       >
-        Chat IA
+        Aplicaciones
       </router-link>
       <button 
         class="mobile-nav-btn contact-btn" 
         @click="openContactModal"
       >
-        Contacto
+        Contactos
       </button>
     </div>
     
