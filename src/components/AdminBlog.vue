@@ -95,7 +95,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://web-vvno.onrender.com'
 
 const categories = ref<{name: string, color: string}[]>([])
 const posts = ref<any[]>([])

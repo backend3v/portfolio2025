@@ -25,9 +25,6 @@
         <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/blog') }" to="/blog">{{ t('navbar.blog') }}</router-link>
       </li>
       <li>
-        <router-link class="nav-btn" :class="{ selected: $route.path.startsWith('/chat-ia') }" to="/chat-ia">{{ t('navbar.apps') }}</router-link>
-      </li>
-      <li>
         <button class="nav-btn contact-btn" @click="openContactModal">{{ t('navbar.contact') }}</button>
       </li>
       <li>
@@ -64,14 +61,6 @@
       >
         {{ t('navbar.blog') }}
       </router-link>
-      <router-link 
-        to="/chat-ia" 
-        class="mobile-nav-btn" 
-        :class="{ selected: $route.path.startsWith('/chat-ia') }"
-        @click="closeMobileMenu"
-      >
-        {{ t('navbar.apps') }}
-      </router-link>
       <button 
         class="mobile-nav-btn contact-btn" 
         @click="openContactModal"
@@ -87,26 +76,23 @@
       </div>
     </div>
     
-    <!-- Contact Modal -->
-    <ContactModal 
-      :is-visible="isContactModalOpen" 
-      @close="closeContactModal" 
-    />
   </nav>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import ContactModal from './ContactModal.vue'
 import '../styles/NavBar.css'
 import { useI18n } from 'vue-i18n'
+
+const emit = defineEmits<{
+  'open-contact': []
+}>()
 
 const { t, locale } = useI18n()
 
 const $route = useRoute()
 const isMobileMenuOpen = ref(false)
-const isContactModalOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -124,12 +110,8 @@ const closeMobileMenu = () => {
 }
 
 const openContactModal = () => {
-  isContactModalOpen.value = true
+  emit('open-contact')
   closeMobileMenu() // Close mobile menu if open
-}
-
-const closeContactModal = () => {
-  isContactModalOpen.value = false
 }
 
 // Handle escape key
@@ -137,9 +119,6 @@ const handleKeydown = (event: any) => {
   if (event.key === 'Escape') {
     if (isMobileMenuOpen.value) {
       closeMobileMenu()
-    }
-    if (isContactModalOpen.value) {
-      closeContactModal()
     }
   }
 }

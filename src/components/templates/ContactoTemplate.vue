@@ -21,9 +21,17 @@
 </template>
 
 <script setup lang="ts">
+import { inject } from 'vue'
+
+const openContactModal = inject<() => void>('openContactModal')
+
 function onMailClick() {
-  // Función pendiente para enviar mail
-  alert('Funcionalidad de envío de mail pendiente');
+  if (openContactModal) {
+    openContactModal()
+  } else {
+    // Fallback por si no está disponible la función inyectada
+    alert('Funcionalidad de envío de mail pendiente')
+  }
 }
 </script>
 

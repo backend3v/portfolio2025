@@ -53,7 +53,7 @@ const emit = defineEmits<{
   'close': []
 }>()
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://web-vvno.onrender.com'
 const loading = ref(false)
 const message = ref('')
 const messageType = ref<'success' | 'error'>('success')

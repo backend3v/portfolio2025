@@ -1,13 +1,28 @@
 <script setup lang="ts">
+import { ref, provide } from 'vue'
 import NavBar from './components/NavBar.vue'
 import ThreeDScene from './components/ThreeDScene.vue'
 import FooterBar from './components/FooterBar.vue'
+import ContactModal from './components/ContactModal.vue'
+
+const isContactModalOpen = ref(false)
+
+const openContactModal = () => {
+  isContactModalOpen.value = true
+}
+
+const closeContactModal = () => {
+  isContactModalOpen.value = false
+}
+
+// Hacer disponible la función en todo el árbol de componentes
+provide('openContactModal', openContactModal)
 </script>
 
 <template>
   <div id="app">
     <header>
-      <NavBar />
+      <NavBar @open-contact="openContactModal" />
     </header>
     <main style="position: relative; width: 100vw; height: 100vh; overflow: hidden;">
       <ThreeDScene />
@@ -16,6 +31,7 @@ import FooterBar from './components/FooterBar.vue'
     <footer>
       <FooterBar />
     </footer>
+    <ContactModal :is-visible="isContactModalOpen" @close="closeContactModal" />
   </div>
 </template>
 

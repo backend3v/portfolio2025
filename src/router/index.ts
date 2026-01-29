@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import ThreeDScene from '../components/ThreeDScene.vue'
-import BlogOverlay from '../components/BlogOverlay.vue'
 import AdminBlog from '../components/AdminBlog.vue'
 import OverlayContent from '../components/OverlayContent.vue'
 import HomeView from '../views/HomeView.vue'
@@ -25,11 +23,6 @@ const router = createRouter({
       path: '/admin-blog',
       name: 'admin-blog',
       component: AdminBlog,
-    },
-    {
-      path: '/chat-ia',
-      name: 'chat-ia',
-      component: ChatIAView,
     },
   ],
 })
