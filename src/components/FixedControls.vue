@@ -380,7 +380,7 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .blogia-controls-fixed,
   .chat-controls-fixed {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 0.8em;
     padding: 1em;
     height: auto;
